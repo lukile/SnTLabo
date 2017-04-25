@@ -1,5 +1,6 @@
 package employes;
 import java.sql.Date;
+import java.util.Arrays;
 
 public class Scientifique extends Collaborateur{
 	private Double 		salaire;
@@ -49,6 +50,14 @@ public class Scientifique extends Collaborateur{
 
 	public void setResponsable(boolean responsable) {
 		this.responsable = responsable;
+	}
+
+	@Override
+	public String toString() {
+		return "Scientifique : "
+				+ super.toString()
+				+ ", salaire =" + salaire 
+				+ ", prime =" + prime 
+				+ ", responsable =" + responsable;
 	}	
-	
 }

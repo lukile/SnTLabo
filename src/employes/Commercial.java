@@ -51,4 +51,15 @@ public class Commercial extends Collaborateur{
 	public void setRemboursement(boolean remboursement) {
 		this.remboursement = remboursement;
 	}
+
+	@Override
+	public String toString() {
+		return "Commercial : "
+				+ super.toString()
+				+ ", salaire = " + salaire 
+				+ ", note de frais=" + noteDeFrais 
+				+ ", remboursement=" + remboursement;
+	}
+	
+	
 }

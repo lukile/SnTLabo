@@ -73,5 +73,18 @@ public class Medecin extends Collaborateur{
 	public void setFinEssaiClinique(Date finEssaiClinique) {
 		this.finEssaiClinique = finEssaiClinique;
 	}
+
+	@Override
+	public String toString() {
+		return "Medecin : "
+				+ super.toString()
+				+ ", salaire =" + salaire + 
+				", prime =" + prime + 
+				", essai Clinique =" + essaiClinique
+				+ ", date du début Essai Clinique = " + debutEssaiClinique 
+				+ ", date de fin Essai Clinique =" + finEssaiClinique;
+	}
+	
+	
 	
 }

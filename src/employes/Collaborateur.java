@@ -1,5 +1,6 @@
 package employes;
 import java.sql.Date;
+import java.util.Arrays;
 
 public class Collaborateur {
 	protected int 		numeroIdentification;
@@ -9,7 +10,7 @@ public class Collaborateur {
 	protected String 	telephone;
 	protected int 		codeProjet;
 	protected Date 		dateEmbauche;
-	private String[] 	ville = {"Strasbourg", "Grenoble", "Rennes", "Marseille", "Bordeaux", "Toulouse"};
+	protected String[] 	ville = {"Strasbourg", "Grenoble", "Rennes", "Marseille", "Bordeaux", "Toulouse"};
 
 	public Collaborateur(){};
 	
@@ -87,4 +88,19 @@ public class Collaborateur {
 	public void setVille(String[] ville) {
 		this.ville = ville;
 	}
+
+	@Override
+	public String toString() {
+		return "Collaborateur : "
+				+ " numero d'identification = " + numeroIdentification 
+				+ ", nom = " + nom + 
+				", prenom = " + prenom
+				+ ", email = " + email + 
+				", telephone = " + telephone + 
+				", codeProjet = " + codeProjet 
+				+ ", dateEmbauche = " + dateEmbauche 
+				+ ", ville = " + Arrays.toString(ville);
+	}
+	
+	
 }
