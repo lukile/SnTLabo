@@ -23,13 +23,14 @@ public class Soiree extends Evenement{
 			Date debutEssaiClinique,
 			Date finEssaiClinique,
 			String moleculeTestee,
+			Date dateEvenement,
 			Time heureDebutSoiree,
 			Time heureFinSoiree){
 		
 		super(numeroIdentification, nom, prenom,
 				email, telephone, codeProjet, dateEmbauche,
 				ville, salaire, prime, essaiClinique, 
-				debutEssaiClinique, finEssaiClinique, moleculeTestee);
+				debutEssaiClinique, finEssaiClinique, moleculeTestee, dateEvenement);
 		
 		this.heureDebutSoiree = heureDebutSoiree;
 		this.heureFinSoiree = heureFinSoiree;
@@ -49,6 +50,14 @@ public class Soiree extends Evenement{
 
 	public void setHeureFinSoiree(Time heureFinSoiree) {
 		this.heureFinSoiree = heureFinSoiree;
+	}
+
+	@Override
+	public String toString() {
+		return "Soiree : "
+				+ super.toString()
+				+ ", heure de début de soiree = " + heureDebutSoiree 
+				+ ", heure de fin de soiree = " + heureFinSoiree;
 	}
 	
 	
