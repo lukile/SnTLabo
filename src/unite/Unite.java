@@ -61,4 +61,15 @@ public class Unite{
 	public void setRegion(String region) {
 		this.region = region;
 	}
+
+	@Override
+	public String toString() {
+		return "Unite : "
+				+ "nom de l'unité = " + nomUnite 
+				+ ", numero de rue = " + numeroRue 
+				+ ", nom de rue = " + nomRue + 
+				", code postal = " + codePostal 
+				+ ", region = " + region;
+	}
+	
 }
