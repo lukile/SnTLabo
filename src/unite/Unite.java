@@ -1,25 +1,37 @@
 package unite;
 
 public class Unite{
+	private int 		id;
 	private String 		nomUnite;
-	private int 		numeroRue;
+	private String 		numeroRue;
 	private String 		nomRue;
 	private int 		codePostal;
-	private String 		region;
+	private String 		ville;
 	
 	public Unite(){}
 	
-	public Unite(String nomUnite, 
-			int numeroRue, 
+	public Unite(
+			int id,
+			String nomUnite, 
+			String numeroRue, 
 			String nomRue, 
 			int codePostal, 
-			String region){
+			String ville){
 		
+		this.id = id;
 		this.nomUnite = nomUnite;
 		this.numeroRue = numeroRue;
 		this.nomRue = nomRue;
 		this.codePostal = codePostal;
-		this.region = region;
+		this.ville = ville;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getNomUnite() {
@@ -30,11 +42,11 @@ public class Unite{
 		this.nomUnite = nomUnite;
 	}
 
-	public int getNumeroRue() {
+	public String getNumeroRue() {
 		return numeroRue;
 	}
 
-	public void setNumeroRue(int numeroRue) {
+	public void setNumeroRue(String numeroRue) {
 		this.numeroRue = numeroRue;
 	}
 
@@ -54,12 +66,12 @@ public class Unite{
 		this.codePostal = codePostal;
 	}
 
-	public String getRegion() {
-		return region;
+	public String getville() {
+		return ville;
 	}
 
-	public void setRegion(String region) {
-		this.region = region;
+	public void setville(String ville) {
+		this.ville = ville;
 	}
 
 	@Override
@@ -69,7 +81,7 @@ public class Unite{
 				+ ", numero de rue = " + numeroRue 
 				+ ", nom de rue = " + nomRue + 
 				", code postal = " + codePostal 
-				+ ", region = " + region;
+				+ ", ville = " + ville;
 	}
 	
 }
