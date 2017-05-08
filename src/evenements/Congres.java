@@ -3,12 +3,15 @@ package evenements;
 import java.sql.Date;
 
 public class Congres extends Evenement{
+	private int 	id;
 	private Date 	dateDebutCongres;
 	private Date 	dateFinCongres;
 	
 	public Congres(){}
 	
-	public Congres(int numeroIdentification,
+	public Congres(
+			int id,
+			int numeroIdentification,
 			String nom,
 			String prenom,
 			String email, 
@@ -26,13 +29,22 @@ public class Congres extends Evenement{
 			Date dateDebutCongres,
 			Date dateFinCongres){
 		
-		super(numeroIdentification, nom, prenom,
+		super(id, numeroIdentification, nom, prenom,
 				email, telephone, codeProjet, dateEmbauche,
 				ville, salaire, prime, essaiClinique, debutEssaiClinique,
 				finEssaiClinique, moleculeTestee, dateEvenement);
 		
+		this.id = id;
 		this.dateDebutCongres = dateDebutCongres;
 		this.dateFinCongres = dateFinCongres;
+	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public Date getDateDebutCongres() {

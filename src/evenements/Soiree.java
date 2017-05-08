@@ -4,12 +4,15 @@ import java.sql.Date;
 import java.sql.Time;
 
 public class Soiree extends Evenement{
+	private int 	id;
 	private Time 	heureDebutSoiree;
 	private Time	heureFinSoiree;
 	
 	public Soiree(){}
 	
-	public Soiree(int numeroIdentification,
+	public Soiree(
+			int id,
+			int numeroIdentification,
 			String nom,
 			String prenom,
 			String email, 
@@ -27,13 +30,22 @@ public class Soiree extends Evenement{
 			Time heureDebutSoiree,
 			Time heureFinSoiree){
 		
-		super(numeroIdentification, nom, prenom,
+		super(id, numeroIdentification, nom, prenom,
 				email, telephone, codeProjet, dateEmbauche,
 				ville, salaire, prime, essaiClinique, 
 				debutEssaiClinique, finEssaiClinique, moleculeTestee, dateEvenement);
 		
+		this.id = id;
 		this.heureDebutSoiree = heureDebutSoiree;
 		this.heureFinSoiree = heureFinSoiree;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public Time getHeureDebutSoiree() {

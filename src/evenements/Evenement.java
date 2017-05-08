@@ -5,12 +5,15 @@ import java.sql.Date;
 import employes.Medecin;
 
 public class Evenement extends Medecin{
-	private String 		moleculeTestee;
-	private Date		dateEvenement;
+	protected int 		id;
+	protected String 	moleculeTestee;
+	protected Date		dateEvenement;
 
 	public Evenement(){}
 	
-	public Evenement(int numeroIdentification, 
+	public Evenement(
+			int id,
+			int numeroIdentification, 
 			String nom, 
 			String prenom,
 			String email,
@@ -26,13 +29,21 @@ public class Evenement extends Medecin{
 			String moleculeTestee,
 			Date dateEvenement){
 		
-		super(numeroIdentification, nom, prenom,
+		super(id, numeroIdentification, nom, prenom,
 				email, telephone, codeProjet,
 				dateEmbauche, ville, salaire,
 				prime, essaiClinique, debutEssaiClinique, finEssaiClinique);
 		
 		this.moleculeTestee = moleculeTestee;
 		this.dateEvenement = dateEvenement;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getMoleculeTestee() {
