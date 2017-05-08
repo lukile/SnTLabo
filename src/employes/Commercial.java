@@ -3,13 +3,16 @@ package employes;
 import java.sql.Date;
 
 public class Commercial extends Collaborateur{
+	private int 		id;
 	private Double 		salaire;
 	private Double 		noteDeFrais;
 	private boolean 	remboursement;
 	
 	public Commercial(){}
 	
-	public Commercial(int numeroIdentification,
+	public Commercial(
+			int id,
+			int numeroIdentification,
 			String nom, 
 			String prenom, 
 			String email,
@@ -23,9 +26,18 @@ public class Commercial extends Collaborateur{
 		
 		super(numeroIdentification, nom, prenom, email, telephone, codeProjet, dateEmbauche, ville);
 		
+		this.id = id;
 		this.salaire = salaire;
 		this.noteDeFrais = noteDeFrais;
 		this.remboursement = remboursement;
+	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public Double getSalaire() {

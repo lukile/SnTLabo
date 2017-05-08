@@ -2,16 +2,19 @@ package employes;
 import java.sql.Date;
 
 public class Medecin extends Collaborateur{
-	private Double 		salaire;
-	private Double 		prime;
-	private boolean 	essaiClinique;
-	private Date 		debutEssaiClinique;
-	private Date 		finEssaiClinique;
+	protected static int 		id;
+	private Double 				salaire;
+	private Double 				prime;
+	private boolean 			essaiClinique;
+	private Date 				debutEssaiClinique;
+	private Date 				finEssaiClinique;
 
 	
 	public Medecin(){}
 	
-	public Medecin(int numeroIdentification, 
+	public Medecin(
+			int id,
+			int numeroIdentification, 
 			String nom, 
 			String prenom, 
 			String email,
@@ -27,11 +30,20 @@ public class Medecin extends Collaborateur{
 		
 		super(numeroIdentification, nom, prenom, email, telephone, codeProjet, dateEmbauche, ville);
 		
+		this.id = id;
 		this.salaire = salaire;
 		this.prime = prime;
 		this.essaiClinique = essaiClinique;
 		this.debutEssaiClinique = debutEssaiClinique;
 		this.finEssaiClinique = finEssaiClinique;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public Double getSalaire() {
