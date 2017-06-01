@@ -1,15 +1,17 @@
 package evenements;
 
 import java.sql.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 import employes.Medecin;
 
 public class Evenement extends Medecin{
+	public List<Evenement> ListeEvenements = new LinkedList<Evenement>();
+	
 	protected int 		id;
 	protected String 	moleculeTestee;
 	protected Date		dateEvenement;
-
-	public Evenement(){}
 	
 	public Evenement(
 			int id,

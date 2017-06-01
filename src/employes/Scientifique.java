@@ -1,13 +1,15 @@
 package employes;
 import java.sql.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Scientifique extends Collaborateur{
+	public List<Scientifique> ListeScientifiques = new LinkedList<Scientifique>();
+
 	private int 		id;
 	private Double 		salaire;
 	private Double 		prime;
 	private boolean 	responsable;
-	
-	public Scientifique(){}
 	
 	public Scientifique(
 			int id,

@@ -1,14 +1,17 @@
 package unite;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class Unite{
+	public List<Unite> ListeUnites = new LinkedList<Unite>();
+	
 	private int 		id;
 	private String 		nomUnite;
 	private String 		numeroRue;
 	private String 		nomRue;
 	private int 		codePostal;
 	private String 		ville;
-	
-	public Unite(){}
 	
 	public Unite(
 			int id,

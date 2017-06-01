@@ -1,15 +1,17 @@
 package employes;
 
 import java.sql.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Commercial extends Collaborateur{
+	public List<Commercial> ListeCommerciaux = new LinkedList<Commercial>();
+
 	private int 		id;
 	private Double 		salaire;
 	private Double 		noteDeFrais;
 	private boolean 	remboursement;
-	
-	public Commercial(){}
-	
+		
 	public Commercial(
 			int id,
 			int numeroIdentification,

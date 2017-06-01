@@ -1,8 +1,12 @@
 package employes;
 import java.sql.Date;
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Collaborateur {
+	public List<Collaborateur> ListeCollaborateurs = new LinkedList<Collaborateur>();
+	
 	protected int 		numeroIdentification;
 	protected String 	nom;
 	protected String 	prenom;
@@ -10,11 +14,9 @@ public class Collaborateur {
 	protected String 	telephone;
 	protected int 		codeProjet;
 	protected Date 		dateEmbauche;
-	protected String[] 	ville = {"Strasbourg", "Grenoble", "Rennes", "Marseille", "Bordeaux", "Toulouse"};
+	protected List		ville = new LinkedList("Strasbourg", "Grenoble", "Rennes", "Marseille", "Bordeaux", "Toulouse");
 
-	public Collaborateur(){};
-	
-	public Collaborateur(int numeroIdentification, String nom, String prenom, String email, String telephone, int codeProjet, Date dateEmbauche, String[] ville){
+	public Collaborateur(int numeroIdentification, String nom, String prenom, String email, String telephone, int codeProjet, Date dateEmbauche, List ville){
 		this.numeroIdentification = numeroIdentification;
 		this.nom = nom;
 		this.prenom = prenom;
@@ -101,6 +103,4 @@ public class Collaborateur {
 				+ ", dateEmbauche = " + dateEmbauche 
 				+ ", ville = " + Arrays.toString(ville);
 	}
-	
-	
 }
