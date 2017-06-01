@@ -1,6 +1,5 @@
 package employes;
 import java.sql.Date;
-import java.util.Arrays;
 
 public class Scientifique extends Collaborateur{
 	private int 		id;
@@ -18,10 +17,10 @@ public class Scientifique extends Collaborateur{
 			String email,
 			String telephone,
 			int codeProjet,
-			Date dateEmbauche, 
-			String[] ville, 
-			Double salaire, 
-			Double prime, 
+			Date dateEmbauche,
+			String[] ville,
+			Double salaire,
+			Double prime,
 			boolean responsable, 
 			boolean essaiClinique){
 		

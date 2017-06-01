@@ -2,7 +2,7 @@ package employes;
 import java.sql.Date;
 
 public class Medecin extends Collaborateur{
-	protected static int 		id;
+	protected int 		id;
 	private Double 				salaire;
 	private Double 				prime;
 	private boolean 			essaiClinique;
