@@ -1,6 +1,8 @@
 package evenements;
 
 import java.sql.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Congres extends Evenement{
 	private Date 	dateDebutCongres;
@@ -9,7 +11,8 @@ public class Congres extends Evenement{
 	public Congres(Date dateEvenement, Date dateDebutCongres, Date dateFinCongres){
 
 		super(dateEvenement);
-		
+		List<Congres> ListeCongres = new LinkedList<Congres>();
+
 		this.dateDebutCongres = dateDebutCongres;
 		this.dateFinCongres = dateFinCongres;
 	}

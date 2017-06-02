@@ -1,13 +1,14 @@
 package employes;
 import java.sql.Date;
-import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Scientifique extends Collaborateur{
+	public List<Scientifique> ListeScientifiques = new LinkedList<Scientifique>();
+
 	private Double 		salaire;
 	private Double 		prime;
 	private boolean 	responsable;
-	
-	public Scientifique(){}
 	
 	public Scientifique(
 			int numeroIdentification, 
@@ -16,12 +17,11 @@ public class Scientifique extends Collaborateur{
 			String email,
 			String telephone,
 			int codeProjet,
-			Date dateEmbauche, 
-			String[] ville, 
-			Double salaire, 
-			Double prime, 
-			boolean responsable, 
-			boolean essaiClinique){
+			Date dateEmbauche,
+			String ville,
+			Double salaire,
+			Double prime,
+			boolean responsable){
 		
 		super(numeroIdentification, nom, prenom, email, telephone, codeProjet, dateEmbauche, ville);
 

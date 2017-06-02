@@ -1,14 +1,18 @@
 package employes;
 import java.sql.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Medecin extends Collaborateur{
+	public List<Medecin> ListeMedecins = new LinkedList<Medecin>();
+
 	private Double 				salaire;
 	private Double 				prime;
 	private boolean 			essaiClinique;
 	protected String 	 		moleculeTestee;
 	private Date 				debutEssaiClinique;
 	private Date 				finEssaiClinique;
-
+	
 	public Medecin(
 			int numeroIdentification, 
 			String nom, 
@@ -17,7 +21,7 @@ public class Medecin extends Collaborateur{
 			String telephone,
 			int codeProjet,
 			Date dateEmbauche, 
-			String[] ville, 
+			String ville, 
 			Double salaire, 
 			Double prime, 
 			boolean essaiClinique, 
@@ -87,9 +91,10 @@ public class Medecin extends Collaborateur{
 	public String toString() {
 		return "Medecin : "
 				+ super.toString()
-				+ ", salaire =" + salaire + 
-				", prime =" + prime + 
-				", essai Clinique =" + essaiClinique
+				+ ", salaire =" + salaire 
+				+ ", prime =" + prime 
+				+ ", essai Clinique =" + essaiClinique
+				+ ", molécule testée = " + moleculeTestee
 				+ ", date du début Essai Clinique = " + debutEssaiClinique 
 				+ ", date de fin Essai Clinique =" + finEssaiClinique;
 	}

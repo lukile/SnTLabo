@@ -6,6 +6,7 @@ public class Evenement {
 	protected Date		dateEvenement;
 
 	public Evenement(Date dateEvenement){
+
 		
 		this.dateEvenement = dateEvenement;
 	}

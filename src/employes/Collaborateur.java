@@ -1,9 +1,12 @@
 package employes;
 import java.sql.Date;
-import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 
 public class Collaborateur {
+	protected List<String> ListeVille = new LinkedList<String>();
+	
 	protected int 		numeroIdentification;
 	protected String 	nom;
 	protected String 	prenom;
@@ -11,11 +14,21 @@ public class Collaborateur {
 	protected String 	telephone;
 	protected int 		codeProjet;
 	protected Date 		dateEmbauche;
-	protected String[] 	ville = {"Strasbourg", "Grenoble", "Rennes", "Marseille", "Bordeaux", "Toulouse"};
-
-	public Collaborateur(){};
+	protected String	ville;
 	
-	public Collaborateur(int numeroIdentification, String nom, String prenom, String email, String telephone, int codeProjet, Date dateEmbauche, String[] ville){
+	private void LoadVilleListe(){
+		ListeVille.add("Strasbourg");
+		ListeVille.add("Grenoble");
+		ListeVille.add("Rennes");
+		ListeVille.add("Marseille");
+		ListeVille.add("Bordeaux");
+		ListeVille.add("Toulouse");
+	}
+	
+	public Collaborateur(int numeroIdentification, String nom, String prenom, String email, String telephone, int codeProjet, Date dateEmbauche, String ville){
+		if(ListeVille.isEmpty()){
+			LoadVilleListe();
+		}
 		this.numeroIdentification = numeroIdentification;
 		this.nom = nom;
 		this.prenom = prenom;
@@ -82,11 +95,11 @@ public class Collaborateur {
 		this.dateEmbauche = dateEmbauche;
 	}
 
-	public String[] getVille() {
+	public String getVille() {
 		return ville;
 	}
 
-	public void setVille(String[] ville) {
+	public void setVille(String ville) {
 		this.ville = ville;
 	}
 
@@ -100,8 +113,6 @@ public class Collaborateur {
 				", telephone = " + telephone + 
 				", codeProjet = " + codeProjet 
 				+ ", dateEmbauche = " + dateEmbauche 
-				+ ", ville = " + Arrays.toString(ville);
+				+ ", ville = " + ville.toString();
 	}
-	
-	
 }

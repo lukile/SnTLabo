@@ -2,19 +2,21 @@ package evenements;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Soiree extends Evenement{
 	private Time 	heureDebutSoiree;
 	private Time	heureFinSoiree;
 	
 	public Soiree(Date dateEvenement, Time heureDebutSoiree, Time heureFinSoiree){
-		
 		super(dateEvenement);
-		
+		List<Soiree> ListeSoirees = new LinkedList<Soiree>();
+	
 		this.heureDebutSoiree = heureDebutSoiree;
 		this.heureFinSoiree = heureFinSoiree;
 	}
-
+	
 	public Time getHeureDebutSoiree() {
 		return heureDebutSoiree;
 	}

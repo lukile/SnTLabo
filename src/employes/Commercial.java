@@ -1,14 +1,16 @@
 package employes;
 
 import java.sql.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Commercial extends Collaborateur{
+	public List<Commercial> ListeCommerciaux = new LinkedList<Commercial>();
+
 	private Double 		salaire;
 	private Double 		noteDeFrais;
 	private boolean 	remboursement;
-	
-	public Commercial(){}
-	
+		
 	public Commercial(
 			int numeroIdentification,
 			String nom, 
@@ -17,7 +19,7 @@ public class Commercial extends Collaborateur{
 			String telephone,
 			int codeProjet,
 			Date dateEmbauche, 
-			String[] ville, 
+			String ville, 
 			Double salaire, 
 			Double noteDeFrais, 
 			boolean remboursement){
