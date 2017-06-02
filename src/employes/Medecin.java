@@ -5,12 +5,10 @@ public class Medecin extends Collaborateur{
 	private Double 				salaire;
 	private Double 				prime;
 	private boolean 			essaiClinique;
+	protected String 	 		moleculeTestee;
 	private Date 				debutEssaiClinique;
 	private Date 				finEssaiClinique;
 
-	
-	public Medecin(){}
-	
 	public Medecin(
 			int numeroIdentification, 
 			String nom, 
@@ -23,6 +21,7 @@ public class Medecin extends Collaborateur{
 			Double salaire, 
 			Double prime, 
 			boolean essaiClinique, 
+			String moleculeTestee,
 			Date debutEssaiClinique, 
 			Date finEssaiClinique){
 		
@@ -31,6 +30,7 @@ public class Medecin extends Collaborateur{
 		this.salaire = salaire;
 		this.prime = prime;
 		this.essaiClinique = essaiClinique;
+		this.moleculeTestee = moleculeTestee;
 		this.debutEssaiClinique = debutEssaiClinique;
 		this.finEssaiClinique = finEssaiClinique;
 	}
@@ -73,6 +73,14 @@ public class Medecin extends Collaborateur{
 
 	public void setFinEssaiClinique(Date finEssaiClinique) {
 		this.finEssaiClinique = finEssaiClinique;
+	}
+	
+	public String getMoleculeTestee() {
+		return moleculeTestee;
+	}
+
+	public void setMoleculeTestee(String moleculeTestee) {
+		this.moleculeTestee = moleculeTestee;
 	}
 
 	@Override
