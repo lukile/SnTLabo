@@ -21,7 +21,7 @@ public class Commercial extends Collaborateur{
 			String telephone,
 			int codeProjet,
 			Date dateEmbauche, 
-			String[] ville, 
+			String ville, 
 			Double salaire, 
 			Double noteDeFrais, 
 			boolean remboursement){

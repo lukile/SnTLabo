@@ -22,7 +22,7 @@ public class Medecin extends Collaborateur{
 			String telephone,
 			int codeProjet,
 			Date dateEmbauche, 
-			String[] ville, 
+			String ville, 
 			Double salaire, 
 			Double prime, 
 			boolean essaiClinique, 
