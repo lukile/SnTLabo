@@ -5,8 +5,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Collaborateur {
-	public List<Collaborateur> ListeCollaborateurs = new LinkedList<Collaborateur>();
-	
 	protected int 		numeroIdentification;
 	protected String 	nom;
 	protected String 	prenom;
@@ -14,9 +12,15 @@ public class Collaborateur {
 	protected String 	telephone;
 	protected int 		codeProjet;
 	protected Date 		dateEmbauche;
-	protected List		ville = new LinkedList("Strasbourg", "Grenoble", "Rennes", "Marseille", "Bordeaux", "Toulouse");
-
+	protected List		ville = new LinkedList<String>();
+	
 	public Collaborateur(int numeroIdentification, String nom, String prenom, String email, String telephone, int codeProjet, Date dateEmbauche, List ville){
+		ville.add("Strasbourg");
+		ville.add("Grenoble");
+		ville.add("Rennes");
+		ville.add("Marseille");
+		ville.add("Bordeaux");
+		ville.add("Toulouse");
 		this.numeroIdentification = numeroIdentification;
 		this.nom = nom;
 		this.prenom = prenom;
@@ -83,11 +87,11 @@ public class Collaborateur {
 		this.dateEmbauche = dateEmbauche;
 	}
 
-	public String[] getVille() {
+	public List<String> getVille() {
 		return ville;
 	}
 
-	public void setVille(String[] ville) {
+	public void setVille(List ville) {
 		this.ville = ville;
 	}
 
@@ -101,6 +105,6 @@ public class Collaborateur {
 				", telephone = " + telephone + 
 				", codeProjet = " + codeProjet 
 				+ ", dateEmbauche = " + dateEmbauche 
-				+ ", ville = " + Arrays.toString(ville);
+				+ ", ville = " + ville.toString();
 	}
 }
