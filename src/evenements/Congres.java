@@ -3,50 +3,17 @@ package evenements;
 import java.sql.Date;
 
 public class Congres extends Evenement{
-	private int 	id;
 	private Date 	dateDebutCongres;
 	private Date 	dateFinCongres;
 	
-	public Congres(){}
-	
-	public Congres(
-			int id,
-			int numeroIdentification,
-			String nom,
-			String prenom,
-			String email, 
-			String telephone,
-			int codeProjet,
-			Date dateEmbauche,
-			String[] ville,
-			Double salaire,
-			Double prime,
-			boolean essaiClinique,
-			Date debutEssaiClinique,
-			Date finEssaiClinique,
-			String moleculeTestee,
-			Date dateEvenement,
-			Date dateDebutCongres,
-			Date dateFinCongres){
+	public Congres(Date dateEvenement, Date dateDebutCongres, Date dateFinCongres){
+
+		super(dateEvenement);
 		
-		super(id, numeroIdentification, nom, prenom,
-				email, telephone, codeProjet, dateEmbauche,
-				ville, salaire, prime, essaiClinique, debutEssaiClinique,
-				finEssaiClinique, moleculeTestee, dateEvenement);
-		
-		this.id = id;
 		this.dateDebutCongres = dateDebutCongres;
 		this.dateFinCongres = dateFinCongres;
 	}
 	
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	public Date getDateDebutCongres() {
 		return dateDebutCongres;
 	}
