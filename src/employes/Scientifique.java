@@ -3,7 +3,6 @@ import java.sql.Date;
 import java.util.Arrays;
 
 public class Scientifique extends Collaborateur{
-	private int 		id;
 	private Double 		salaire;
 	private Double 		prime;
 	private boolean 	responsable;
@@ -11,7 +10,6 @@ public class Scientifique extends Collaborateur{
 	public Scientifique(){}
 	
 	public Scientifique(
-			int id,
 			int numeroIdentification, 
 			String nom, 
 			String prenom, 
@@ -26,20 +24,11 @@ public class Scientifique extends Collaborateur{
 			boolean essaiClinique){
 		
 		super(numeroIdentification, nom, prenom, email, telephone, codeProjet, dateEmbauche, ville);
-		
-		this.id = id;
+
 		this.prime = prime;
 		this.responsable = responsable;		
 	}
 	
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	public Double getSalaire() {
 		return salaire;
 	}
