@@ -21,8 +21,7 @@ public class Evenement {
 
 	@Override
 	public String toString() {
-		return "Evenement : Médecin affecté -> " 
-				+ super.toString() 
+		return "Evenement : " 
 				+ ", date de l'évènement = " + dateEvenement;
 	}
 	
