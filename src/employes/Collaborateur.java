@@ -2,6 +2,7 @@ package employes;
 import java.sql.Date;
 import java.util.Arrays;
 
+
 public class Collaborateur {
 	protected int 		numeroIdentification;
 	protected String 	nom;
