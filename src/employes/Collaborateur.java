@@ -5,6 +5,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Collaborateur {
+	protected List<String> ListeVille = new LinkedList<String>();
+	
 	protected int 		numeroIdentification;
 	protected String 	nom;
 	protected String 	prenom;
@@ -12,15 +14,21 @@ public class Collaborateur {
 	protected String 	telephone;
 	protected int 		codeProjet;
 	protected Date 		dateEmbauche;
-	protected List		ville = new LinkedList<String>();
+	protected String	ville;
 	
-	public Collaborateur(int numeroIdentification, String nom, String prenom, String email, String telephone, int codeProjet, Date dateEmbauche, List ville){
-		ville.add("Strasbourg");
-		ville.add("Grenoble");
-		ville.add("Rennes");
-		ville.add("Marseille");
-		ville.add("Bordeaux");
-		ville.add("Toulouse");
+	private void LoadVilleListe(){
+		ListeVille.add("Strasbourg");
+		ListeVille.add("Grenoble");
+		ListeVille.add("Rennes");
+		ListeVille.add("Marseille");
+		ListeVille.add("Bordeaux");
+		ListeVille.add("Toulouse");
+	}
+	
+	public Collaborateur(int numeroIdentification, String nom, String prenom, String email, String telephone, int codeProjet, Date dateEmbauche, String ville){
+		if(ListeVille.isEmpty()){
+			LoadVilleListe();
+		}
 		this.numeroIdentification = numeroIdentification;
 		this.nom = nom;
 		this.prenom = prenom;
@@ -87,11 +95,11 @@ public class Collaborateur {
 		this.dateEmbauche = dateEmbauche;
 	}
 
-	public List<String> getVille() {
+	public String getVille() {
 		return ville;
 	}
 
-	public void setVille(List ville) {
+	public void setVille(String ville) {
 		this.ville = ville;
 	}
 
