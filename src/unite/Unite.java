@@ -6,7 +6,6 @@ import java.util.List;
 public class Unite{
 	public List<Unite> ListeUnites = new LinkedList<Unite>();
 	
-	private int 		id;
 	private String 		nomUnite;
 	private String 		numeroRue;
 	private String 		nomRue;
@@ -14,27 +13,17 @@ public class Unite{
 	private String 		ville;
 	
 	public Unite(
-			int id,
 			String nomUnite, 
 			String numeroRue, 
 			String nomRue, 
 			int codePostal, 
 			String ville){
 		
-		this.id = id;
 		this.nomUnite = nomUnite;
 		this.numeroRue = numeroRue;
 		this.nomRue = nomRue;
 		this.codePostal = codePostal;
 		this.ville = ville;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getNomUnite() {

@@ -3,6 +3,7 @@ import java.sql.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+
 public class Collaborateur {
 	protected List<String> ListeVille = new LinkedList<String>();
 	

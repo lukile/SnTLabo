@@ -6,15 +6,14 @@ import java.util.List;
 public class Medecin extends Collaborateur{
 	public List<Medecin> ListeMedecins = new LinkedList<Medecin>();
 
-	protected int 		id;
 	private Double 				salaire;
 	private Double 				prime;
 	private boolean 			essaiClinique;
+	protected String 	 		moleculeTestee;
 	private Date 				debutEssaiClinique;
 	private Date 				finEssaiClinique;
-		
+	
 	public Medecin(
-			int id,
 			int numeroIdentification, 
 			String nom, 
 			String prenom, 
@@ -26,25 +25,18 @@ public class Medecin extends Collaborateur{
 			Double salaire, 
 			Double prime, 
 			boolean essaiClinique, 
+			String moleculeTestee,
 			Date debutEssaiClinique, 
 			Date finEssaiClinique){
 		
 		super(numeroIdentification, nom, prenom, email, telephone, codeProjet, dateEmbauche, ville);
 		
-		this.id = id;
 		this.salaire = salaire;
 		this.prime = prime;
 		this.essaiClinique = essaiClinique;
+		this.moleculeTestee = moleculeTestee;
 		this.debutEssaiClinique = debutEssaiClinique;
 		this.finEssaiClinique = finEssaiClinique;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public Double getSalaire() {
@@ -86,14 +78,23 @@ public class Medecin extends Collaborateur{
 	public void setFinEssaiClinique(Date finEssaiClinique) {
 		this.finEssaiClinique = finEssaiClinique;
 	}
+	
+	public String getMoleculeTestee() {
+		return moleculeTestee;
+	}
+
+	public void setMoleculeTestee(String moleculeTestee) {
+		this.moleculeTestee = moleculeTestee;
+	}
 
 	@Override
 	public String toString() {
 		return "Medecin : "
 				+ super.toString()
-				+ ", salaire =" + salaire + 
-				", prime =" + prime + 
-				", essai Clinique =" + essaiClinique
+				+ ", salaire =" + salaire 
+				+ ", prime =" + prime 
+				+ ", essai Clinique =" + essaiClinique
+				+ ", molécule testée = " + moleculeTestee
 				+ ", date du début Essai Clinique = " + debutEssaiClinique 
 				+ ", date de fin Essai Clinique =" + finEssaiClinique;
 	}

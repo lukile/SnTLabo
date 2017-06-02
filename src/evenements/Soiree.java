@@ -6,50 +6,17 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Soiree extends Evenement{
-	public List<Soiree> ListeSoirees = new LinkedList<Soiree>();
-	
-	private int 	id;
 	private Time 	heureDebutSoiree;
 	private Time	heureFinSoiree;
 	
-	public Soiree(
-			int id,
-			int numeroIdentification,
-			String nom,
-			String prenom,
-			String email, 
-			String telephone,
-			int codeProjet,
-			Date dateEmbauche,
-			String ville,
-			Double salaire,
-			Double prime,
-			boolean essaiClinique,
-			Date debutEssaiClinique,
-			Date finEssaiClinique,
-			String moleculeTestee,
-			Date dateEvenement,
-			Time heureDebutSoiree,
-			Time heureFinSoiree){
-		
-		super(id, numeroIdentification, nom, prenom,
-				email, telephone, codeProjet, dateEmbauche,
-				ville, salaire, prime, essaiClinique, 
-				debutEssaiClinique, finEssaiClinique, moleculeTestee, dateEvenement);
-		
-		this.id = id;
+	public Soiree(Date dateEvenement, Time heureDebutSoiree, Time heureFinSoiree){
+		super(dateEvenement);
+		List<Soiree> ListeSoirees = new LinkedList<Soiree>();
+	
 		this.heureDebutSoiree = heureDebutSoiree;
 		this.heureFinSoiree = heureFinSoiree;
 	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
+	
 	public Time getHeureDebutSoiree() {
 		return heureDebutSoiree;
 	}

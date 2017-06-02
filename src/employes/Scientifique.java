@@ -6,13 +6,11 @@ import java.util.List;
 public class Scientifique extends Collaborateur{
 	public List<Scientifique> ListeScientifiques = new LinkedList<Scientifique>();
 
-	private int 		id;
 	private Double 		salaire;
 	private Double 		prime;
 	private boolean 	responsable;
 	
 	public Scientifique(
-			int id,
 			int numeroIdentification, 
 			String nom, 
 			String prenom, 
@@ -23,24 +21,14 @@ public class Scientifique extends Collaborateur{
 			String ville,
 			Double salaire,
 			Double prime,
-			boolean responsable, 
-			boolean essaiClinique){
+			boolean responsable){
 		
 		super(numeroIdentification, nom, prenom, email, telephone, codeProjet, dateEmbauche, ville);
-		
-		this.id = id;
+
 		this.prime = prime;
 		this.responsable = responsable;		
 	}
 	
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	public Double getSalaire() {
 		return salaire;
 	}
