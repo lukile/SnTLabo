@@ -1,29 +1,36 @@
 package evenements;
 
-import java.sql.Date;
-
 public class Evenement {
-	protected Date		dateEvenement;
+	protected String	adresse;
+	protected String	moleculeTestee;
 
-	public Evenement(Date dateEvenement){
+	public Evenement(String adresse, String moleculeTestee){
 
-		
-		this.dateEvenement = dateEvenement;
+		this.adresse = adresse;
+		this.moleculeTestee = moleculeTestee;
 	}
 
+	public String getAdresse() {
+		return adresse;
+	}
+
+	public void setAdresse(String adresse) {
+		this.adresse = adresse;
+	}
 	
-	public Date getDateEvenement() {
-		return dateEvenement;
+	public String getMoleculeTestee() {
+		return moleculeTestee;
 	}
 
-	public void setDateEvenement(Date dateEvenement) {
-		this.dateEvenement = dateEvenement;
+	public void setMoleculeTestee(String moleculeTestee) {
+		this.moleculeTestee = moleculeTestee;
 	}
 
 	@Override
 	public String toString() {
 		return "Evenement : " 
-				+ ", date de l'évènement = " + dateEvenement;
+				+ " lieu événement = " + adresse
+				+ ", molécule testée = " + moleculeTestee;
 	}
 	
 }
