@@ -7,7 +7,7 @@ public class Soiree extends Evenement{
 	private Date 	dateSoiree;
 	private Time 	heureDebutSoiree;
 	private Time	heureFinSoiree;
-	
+
 	public Soiree(String adresse, String moleculeTestee, Date dateSoiree, Time heureDebutSoiree, Time heureFinSoiree){
 		super(adresse, moleculeTestee);
 	
@@ -46,7 +46,7 @@ public class Soiree extends Evenement{
 	public String toString() {
 		return "Soiree : "
 				+ super.toString()
-				+ ", heure de début de soiree = " + heureDebutSoiree 
+				+ ", heure de dï¿½but de soiree = " + heureDebutSoiree 
 				+ ", heure de fin de soiree = " + heureFinSoiree;
 	}
 	

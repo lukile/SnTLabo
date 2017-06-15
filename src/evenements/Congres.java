@@ -7,7 +7,7 @@ public class Congres extends Evenement{
 	private Date 	dateFinCongres;
 	
 	public Congres(String adresse, String moleculeTestee, Date dateDebutCongres, Date dateFinCongres){
-
+		
 		super(adresse, moleculeTestee);
 
 		this.dateDebutCongres = dateDebutCongres;
@@ -34,8 +34,8 @@ public class Congres extends Evenement{
 	public String toString() {
 		return "Congres : "
 				+ super.toString()
-				+ ", date du début de congrès = " + dateDebutCongres 
-				+ ", date de fin de congrès = " + dateFinCongres;
+				+ ", date du dï¿½but de congrï¿½s = " + dateDebutCongres 
+				+ ", date de fin de congrï¿½s = " + dateFinCongres;
 	}
 	
 }
