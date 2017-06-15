@@ -1,11 +1,8 @@
 package employes;
 import java.sql.Date;
-import java.util.LinkedList;
-import java.util.List;
 
 
 public class Collaborateur {
-	protected List<String> ListeVille = new LinkedList<String>();
 	
 	protected int 		numeroIdentification;
 	protected String 	nom;
@@ -16,19 +13,8 @@ public class Collaborateur {
 	protected Date 		dateEmbauche;
 	protected String	ville;
 	
-	private void LoadVilleListe(){
-		ListeVille.add("Strasbourg");
-		ListeVille.add("Grenoble");
-		ListeVille.add("Rennes");
-		ListeVille.add("Marseille");
-		ListeVille.add("Bordeaux");
-		ListeVille.add("Toulouse");
-	}
 	
 	public Collaborateur(int numeroIdentification, String nom, String prenom, String email, String telephone, int codeProjet, Date dateEmbauche, String ville){
-		if(ListeVille.isEmpty()){
-			LoadVilleListe();
-		}
 		this.numeroIdentification = numeroIdentification;
 		this.nom = nom;
 		this.prenom = prenom;
