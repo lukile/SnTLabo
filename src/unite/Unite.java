@@ -1,10 +1,6 @@
 package unite;
 
-import java.util.LinkedList;
-import java.util.List;
-
 public class Unite{
-	public List<Unite> ListeUnites = new LinkedList<Unite>();
 	
 	private String 		nomUnite;
 	private String 		numeroRue;
