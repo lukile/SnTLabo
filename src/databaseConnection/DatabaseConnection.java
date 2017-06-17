@@ -1,90 +1,141 @@
 package databaseConnection;
 
+import employes.Collaborateur;
+import employes.Commercial;
+import employes.Medecin;
+import employes.Scientifique;
+
 import java.sql.*;
 
 public class DatabaseConnection {
 
-    private Connection getConnection() {
-        String url = "jdbc:mysql://localhost:3306/sntlabo";
-        String login = "root";
-        String pwd = "";
-        Connection connexion = null;
-       // Statement statement = null;
+    private Connection connection;
+
+    public boolean insert(Collaborateur collaborateur) {
+        initConnection();
 
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            connexion = DriverManager.getConnection(url, login, pwd);
-            //statement = connexion.createStatement();
+            String insert = "INSERT INTO collaborateur(nom, prenom, email, telephone, codeProjet, dateEmbauche, ville) " +
+                    "VALUES (?,?,?,?,?,?,?);";
 
+            PreparedStatement statement = connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
+
+            statement.setString(1, collaborateur.getNom());
+            statement.setString(2, collaborateur.getPrenom());
+            statement.setString(3, collaborateur.getEmail());
+            statement.setString(4, collaborateur.getTelephone());
+            statement.setInt(5, collaborateur.getCodeProjet());
+            statement.setString(6, collaborateur.getDateEmbauche());
+            statement.setString(7, collaborateur.getVille());
+
+            statement.execute();
+
+            ResultSet generatedKeys = statement.getGeneratedKeys();
+            int collaborateurId;
+            if (generatedKeys.next()) {
+                collaborateurId = generatedKeys.getInt(1);
+                collaborateur.setNumeroIdentification(collaborateurId);
+            }
+
+            if (collaborateur instanceof Medecin) {
+                this.insert((Medecin) collaborateur);
+            }else if(collaborateur instanceof Scientifique){
+                this.insert((Scientifique) collaborateur);
+            } else if (collaborateur instanceof Commercial) {
+                this.insert((Commercial) collaborateur);
+            }
+        } catch (SQLException e) {
+            unchecked(() -> connection.rollback());
+
+            e.printStackTrace();
+            return false;
+        } finally {
+            unchecked(() -> connection.close());
+        }
+        return true;
+    }
+
+    private void unchecked(WrapSqlFunction function) {
+        try {
+            function.run();
         } catch (SQLException e) {
             e.printStackTrace();
-
-        } catch (ClassNotFoundException e) {
-
-            e.printStackTrace();
-        } /*finally {
-            try {
-                // Etape 6 : libérer ressources de la mémoire proprement
-                connexion.close();
-                statement.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }*/
-
-        return connexion;
+        }
     }
 
 
-    public boolean insert(int numeroIdentification,
-                          String nom,
-                          String prenom,
-                          String email,
-                          String telephone,
-                          int codeProjet,
-                          String dateEmbauche,
-                          String ville) {
-
-        Connection connection = getConnection();
+    private void initConnection() {
+        String url = "jdbc:mysql://localhost:3306/sntlabo";
+        String login = "root";
+        String pwd = "";
 
         try {
-            Statement statement = connection.createStatement();
+            Class.forName("com.mysql.jdbc.Driver");
+            this.connection = DriverManager.getConnection(url, login, pwd);
 
-            String insert = "INSERT INTO collaborateur VALUES ("+
-                    numeroIdentification + ","+
-                    nom + "," +
-                    prenom + ","+
-                    email + "," +
-                    telephone + "," +
-                    codeProjet + "," +
-                    dateEmbauche +"," +
-                    ville + ");";
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
-            statement.execute(insert);
-            System.out.println("L'insertion s'est bien passée");
+    private boolean insert(Medecin medecin) {
+        try {
 
-            /*ResultSet result = statement.executeQuery("SELECT * FROM collaborateur;");
+            String insert = "INSERT INTO medecin(nIdentification, salaire, prime, essaiClinique, debutEssaiClinique, finEssaiClinique)" +
+                    "VALUES(?, ?, ?, ?, ?, ?);";
 
-            while(result.next()){
-                int numero = result.getInt("numeroIdentification");
-                String name = result.getString("nom");
-                String surname = result.getString("prenom");
-                String mail = result.getString("email");
-                String phone = result.getString("telephone");
-                int code = result.getInt("codeProjet");
-                String date = result.getString("dateEmbauche");
-                String country = result.getString("ville");
+            PreparedStatement statement = connection.prepareStatement(insert);
 
-                System.out.println(numero);
-                System.out.println(name);
-                System.out.println(surname);
-                System.out.println(mail);
-                System.out.println(phone);
-                System.out.println(code);
-                System.out.println(date);
-                System.out.println(country);
-            }*/
-            return true;
+            statement.setInt(1, medecin.getNumeroIdentification());
+            statement.setDouble(2, medecin.getSalaire());
+            statement.setDouble(3, medecin.getPrime());
+            statement.setBoolean(4, medecin.isEssaiClinique());
+            statement.setString(5, medecin.getDebutEssaiClinique());
+            statement.setString(6, medecin.getFinEssaiClinique());
+
+            return statement.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    private boolean insert(Scientifique scientifique){
+        try{
+            String insert = "INSERT INTO scientifique(nIdentification, salaire, prime, responsable)" +
+                    "VALUES(?, ?, ?, ?)";
+
+            PreparedStatement statement = connection.prepareStatement(insert);
+
+            statement.setInt(1, scientifique.getNumeroIdentification());
+            statement.setDouble(2, scientifique.getSalaire());
+            statement.setDouble(3, scientifique.getPrime());
+            statement.setBoolean(4, scientifique.isResponsable());
+
+            return statement.execute();
+
+        }catch(SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
+    private boolean insert(Commercial commercial) {
+        try {
+
+            String insert = "INSERT INTO commercial(nIdentification, salaire, noteDeFrais, remboursement)" +
+                    "VALUES(?, ?, ?, ?);";
+
+            PreparedStatement statement = connection.prepareStatement(insert);
+
+            statement.setInt(1, commercial.getNumeroIdentification());
+            statement.setDouble(2, commercial.getSalaire());
+            statement.setDouble(3, commercial.getNoteDeFrais());
+            statement.setBoolean(4, commercial.isRemboursement());
+
+            return statement.execute();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -92,4 +143,3 @@ public class DatabaseConnection {
         }
     }
 }
-
