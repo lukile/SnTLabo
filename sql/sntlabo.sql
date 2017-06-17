@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Sam 17 Juin 2017 à 16:48
+-- Généré le :  Sam 17 Juin 2017 à 18:18
 -- Version du serveur :  5.7.14
 -- Version de PHP :  5.6.25
 
@@ -45,7 +45,15 @@ INSERT INTO `collaborateur` (`numeroIdentification`, `nom`, `prenom`, `email`, `
 (72, 'COTTIN', 'Jean paul', 'jep@gm.com', '2020020202', 1, '25/03/2012', 'cottinet'),
 (73, 'POUETOU', 'Jean Louis', 'jl@pouetou.com', '20020202', 2, '24/03/2012', 'POUETOU CHARENTE'),
 (74, 'POUICOU', 'Jean Luc', 'jl@pouicou.com', '020202020', 3, '23/09/2300', 'POUICOU SUR LOIRE'),
-(75, 'COCO LE CONNARD', 'Stipe', 'cocostipé@g.com', '3333333', 4, '21/09/3210', 'COCOUNET');
+(75, 'COCO LE CONNARD', 'Stipe', 'cocostipé@g.com', '3333333', 4, '21/09/3210', 'COCOUNET'),
+(76, 'ee', 'ee', 'ee', 'ee', 1, 'EE', 'EE'),
+(77, 'a', 'a', 'a', 'a', 1, 'A', 'a'),
+(78, 'pouet', 'pouet', 'pouet', 'é', 3, 'e', 'e'),
+(79, 'd', 'd', 'd', 'd', 2, 'd', 'd'),
+(80, 'p', 'p', 'p', 'p', 1, 'p', 'p'),
+(81, 'a', 'a', 'a', 'a', 1, 'A', 'A'),
+(82, 'a', 'a', 'a', 'a', 1, 'a', '1'),
+(83, 'A', 'a', 'a', '1', 1, '1', '1');
 
 -- --------------------------------------------------------
 
@@ -143,7 +151,15 @@ CREATE TABLE `scientifique` (
 
 INSERT INTO `scientifique` (`nIdentification`, `salaire`, `prime`, `responsable`) VALUES
 (73, 3000, 250, 1),
-(74, 3000, 210, 0);
+(74, 3000, 210, 0),
+(76, 12, 12, 1),
+(77, 1, 1, 1),
+(78, 1, 1, 1),
+(79, 1, 1, 1),
+(80, 1, 1, 1),
+(81, 1, 1, 0),
+(82, 1, 1, 0),
+(83, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -169,8 +185,21 @@ CREATE TABLE `unite` (
   `numeroRue` varchar(255) DEFAULT NULL,
   `nomRue` varchar(255) DEFAULT NULL,
   `codePostal` int(11) DEFAULT NULL,
-  `villeUnite` varchar(255) DEFAULT NULL
+  `villeUnite` varchar(255) DEFAULT NULL,
+  `dateResponsabilite` varchar(255) NOT NULL,
+  `nIdentificationSC` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `unite`
+--
+
+INSERT INTO `unite` (`id`, `nomUnite`, `numeroRue`, `nomRue`, `codePostal`, `villeUnite`, `dateResponsabilite`, `nIdentificationSC`) VALUES
+(1, 'Unite centrale', '3bis', 'rue de la Girouette', 74321, 'Rouen', '12/07/2012', NULL),
+(2, 'Unite centrale', '3bis', 'rue de la Girouette', 74321, 'Rouen', '12/07/2012', NULL),
+(3, 'Unite centrale', '3bis', 'rue de la Girouette', 74321, 'Rouen', '12/07/2012', 80),
+(4, 'pouet', '1', 'pouet', 12221, '', '0', 82),
+(5, 'pouet', '12', '12', 12222, '12', '12/12/2012', 83);
 
 --
 -- Index pour les tables exportées
@@ -244,7 +273,7 @@ ALTER TABLE `unite`
 -- AUTO_INCREMENT pour la table `collaborateur`
 --
 ALTER TABLE `collaborateur`
-  MODIFY `numeroIdentification` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+  MODIFY `numeroIdentification` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 --
 -- AUTO_INCREMENT pour la table `evenement`
 --
@@ -254,7 +283,7 @@ ALTER TABLE `evenement`
 -- AUTO_INCREMENT pour la table `unite`
 --
 ALTER TABLE `unite`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- Contraintes pour les tables exportées
 --
