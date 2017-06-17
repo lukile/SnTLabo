@@ -1,7 +1,5 @@
 package employes;
 
-import java.sql.Date;
-
 public class Commercial extends Collaborateur{
 
 	private Double 		salaire;
@@ -9,19 +7,18 @@ public class Commercial extends Collaborateur{
 	private boolean 	remboursement;
 		
 	public Commercial(
-			int numeroIdentification,
-			String nom, 
+			String nom,
 			String prenom, 
 			String email,
 			String telephone,
 			int codeProjet,
-			Date dateEmbauche, 
+			String dateEmbauche,
 			String ville, 
 			Double salaire, 
 			Double noteDeFrais, 
 			boolean remboursement){
 		
-		super(numeroIdentification, nom, prenom, email, telephone, codeProjet, dateEmbauche, ville);
+		super(nom, prenom, email, telephone, codeProjet, dateEmbauche, ville);
 		
 		this.salaire = salaire;
 		this.noteDeFrais = noteDeFrais;
