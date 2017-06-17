@@ -1,30 +1,28 @@
 package employes;
-import java.sql.Date;
 
 public class Medecin extends Collaborateur{
 
 	private Double 				salaire;
 	private Double 				prime;
 	private boolean 			essaiClinique;
-	private Date 				debutEssaiClinique;
-	private Date 				finEssaiClinique;
+	private String 				debutEssaiClinique;
+	private String 				finEssaiClinique;
 	
 	public Medecin(
-			int numeroIdentification, 
-			String nom, 
+			String nom,
 			String prenom, 
 			String email,
 			String telephone,
 			int codeProjet,
-			Date dateEmbauche, 
+			String dateEmbauche,
 			String ville, 
 			Double salaire, 
 			Double prime, 
 			boolean essaiClinique, 
-			Date debutEssaiClinique, 
-			Date finEssaiClinique){
+			String debutEssaiClinique,
+			String finEssaiClinique){
 		
-		super(numeroIdentification, nom, prenom, email, telephone, codeProjet, dateEmbauche, ville);
+		super(nom, prenom, email, telephone, codeProjet, dateEmbauche, ville);
 		
 		this.salaire = salaire;
 		this.prime = prime;
@@ -57,19 +55,19 @@ public class Medecin extends Collaborateur{
 		this.essaiClinique = essaiClinique;
 	}
 
-	public Date getDebutEssaiClinique() {
+	public String getDebutEssaiClinique() {
 		return debutEssaiClinique;
 	}
 
-	public void setDebutEssaiClinique(Date debutEssaiClinique) {
+	public void setDebutEssaiClinique(String debutEssaiClinique) {
 		this.debutEssaiClinique = debutEssaiClinique;
 	}
 
-	public Date getFinEssaiClinique() {
+	public String getFinEssaiClinique() {
 		return finEssaiClinique;
 	}
 
-	public void setFinEssaiClinique(Date finEssaiClinique) {
+	public void setFinEssaiClinique(String finEssaiClinique) {
 		this.finEssaiClinique = finEssaiClinique;
 	}
 	
@@ -80,7 +78,7 @@ public class Medecin extends Collaborateur{
 				+ ", salaire =" + salaire 
 				+ ", prime =" + prime 
 				+ ", essai Clinique =" + essaiClinique
-				+ ", date du début Essai Clinique = " + debutEssaiClinique 
+				+ ", date du dï¿½but Essai Clinique = " + debutEssaiClinique 
 				+ ", date de fin Essai Clinique =" + finEssaiClinique;
 	}
 	
