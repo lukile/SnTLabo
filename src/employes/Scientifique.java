@@ -1,5 +1,4 @@
 package employes;
-import java.sql.Date;
 
 public class Scientifique extends Collaborateur{
 
@@ -8,20 +7,20 @@ public class Scientifique extends Collaborateur{
 	private boolean 	responsable;
 	
 	public Scientifique(
-			int numeroIdentification, 
-			String nom, 
+			String nom,
 			String prenom, 
 			String email,
 			String telephone,
 			int codeProjet,
-			Date dateEmbauche,
+			String dateEmbauche,
 			String ville,
 			Double salaire,
 			Double prime,
 			boolean responsable){
 		
-		super(numeroIdentification, nom, prenom, email, telephone, codeProjet, dateEmbauche, ville);
+		super(nom, prenom, email, telephone, codeProjet, dateEmbauche, ville);
 
+		this.salaire = salaire;
 		this.prime = prime;
 		this.responsable = responsable;		
 	}
