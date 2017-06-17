@@ -3,30 +3,30 @@ package evenements;
 import java.sql.Date;
 
 public class Congres extends Evenement{
-	private Date 	dateDebutCongres;
-	private Date 	dateFinCongres;
+	private String 	dateDebutCongres;
+	private String 	dateFinCongres;
 	
-	public Congres(String adresse, String moleculeTestee, Date dateDebutCongres, Date dateFinCongres){
+	public Congres(String adresse, String moleculeTestee, String dateDebutCongres, String dateFinCongres){
 
-		super(adresse, moleculeTestee);
+		super (id, adresse, moleculeTestee);
 
 		this.dateDebutCongres = dateDebutCongres;
 		this.dateFinCongres = dateFinCongres;
 	}
 	
-	public Date getDateDebutCongres() {
+	public String getDateDebutCongres() {
 		return dateDebutCongres;
 	}
 
-	public void setDateDebutCongres(Date dateDebutCongres) {
+	public void setDateDebutCongres(String dateDebutCongres) {
 		this.dateDebutCongres = dateDebutCongres;
 	}
 
-	public Date getDateFinCongres() {
+	public String getDateFinCongres() {
 		return dateFinCongres;
 	}
 
-	public void setDateFinCongres(Date dateFinCongres) {
+	public void setDateFinCongres(String dateFinCongres) {
 		this.dateFinCongres = dateFinCongres;
 	}
 
