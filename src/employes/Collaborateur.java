@@ -1,6 +1,4 @@
 package employes;
-import java.sql.Date;
-
 
 public class Collaborateur {
 	
@@ -10,12 +8,11 @@ public class Collaborateur {
 	protected String 	email;
 	protected String 	telephone;
 	protected int 		codeProjet;
-	protected Date 		dateEmbauche;
+	protected String 	dateEmbauche;
 	protected String	ville;
 	
 	
-	public Collaborateur(int numeroIdentification, String nom, String prenom, String email, String telephone, int codeProjet, Date dateEmbauche, String ville){
-		this.numeroIdentification = numeroIdentification;
+	public Collaborateur(String nom, String prenom, String email, String telephone, int codeProjet, String dateEmbauche, String ville){
 		this.nom = nom;
 		this.prenom = prenom;
 		this.email = email;
@@ -26,10 +23,12 @@ public class Collaborateur {
 	}
 
 	public int getNumeroIdentification() {
+
 		return numeroIdentification;
 	}
 
 	public void setNumeroIdentification(int numeroIdentification) {
+
 		this.numeroIdentification = numeroIdentification;
 	}
 
@@ -73,11 +72,13 @@ public class Collaborateur {
 		this.codeProjet = codeProjet;
 	}
 
-	public Date getDateEmbauche() {
+	public String getDateEmbauche()
+	{
 		return dateEmbauche;
 	}
 
-	public void setDateEmbauche(Date dateEmbauche) {
+	public void setDateEmbauche(String dateEmbauche) {
+
 		this.dateEmbauche = dateEmbauche;
 	}
 
