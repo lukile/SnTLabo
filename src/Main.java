@@ -5,6 +5,7 @@ import employes.Medecin;
 import employes.Scientifique;
 import evenements.Congres;
 import evenements.Evenement;
+import evenements.Soiree;
 import unite.Unite;
 
 import javax.sound.midi.Soundbank;
@@ -103,26 +104,22 @@ public class Main {
 
                         System.out.println("Adresse de l'evènement :");
                         String adresse = scanner.nextLine();
-//                        String adresse = "7 rue des babouins 99999 BABINOUCHET";
 
                         System.out.println("Nom de la molécule testée :");
                         String moleculeTestee = scanner.nextLine();
-//                        String moleculeTestee = "Polyglycérine";
 
                         System.out.println("Date de début du congrès");
                         String dateDebutCongres = scanner.nextLine();
-//                        String dateDebutCongres = "23/02/2123";
 
                         System.out.println("Date de fin de congrès");
                         String dateFinCongres = scanner.nextLine();
-//                        String dateFinCongres = "23/04/2123";
 
                                 Evenement evenement = new Congres(adresse, moleculeTestee,
                                 dateDebutCongres, dateFinCongres);
 
                         dbConnection.insert(evenement);
 
-                        dbConnection.insert(collaborateur, evenement);
+                        dbConnection.insertMedecinEvenement(collaborateur, evenement);
                     }
 
                 }else if(choice == 2){
@@ -159,29 +156,22 @@ public class Main {
                     if(yesOrNotU.equals("O")){
                         System.out.println("Renseignez le nom de l'unité :");
                         String nomUnite = scanner.nextLine();
-//                        String nomUnite = "Unite centrale";
 
                         System.out.println("N° de rue :");
                         String numRue = scanner.nextLine();
-//                        String numRue = "3bis";
 
                         System.out.println("Nom de la rue :");
                         String nomRue = scanner.nextLine();
-//                        String nomRue = "rue de la Girouette";
 
                         System.out.println("Code Postal :");
                         int cp = scanner.nextInt();
-//                        int cp = 74321;
 
                         System.out.println("Ville :");
                         scanner.nextLine();
                         String villeU = scanner.nextLine();
-//                        String villeU = "Rouen";
 
                         System.out.println("Date de la prise de la prise de responsabilité du scientifique (0 si le scientifique n'est pas responsable de l'unité):");
                         String dateResponsabiliteSC = scanner.nextLine();
-
-//                        String dateResponsabiliteSC = "12/07/2012";
 
                         Unite unite = new Unite(
                                 nomUnite, numRue, nomRue, cp,
@@ -190,23 +180,25 @@ public class Main {
                         dbConnection.insert(unite, collaborateur);
                     }
 
-
-
                 }else if(choice == 3){
                     System.out.println("Salaire :");
                     Double salaire = scanner.nextDouble();
 
-                    System.out.println("Note de frais :");
+                    System.out.println("Note de frais (0 si le commercial n'a pas participé à une soirée) :");
                     Double noteDeFrais = scanner.nextDouble();
-
-                    System.out.println("Le remboursement a t il été effectué?O/N");
-                    scanner.nextLine();
-                    String yesOrNot = scanner.nextLine();
 
                     boolean remboursement = false;
 
-                    if(yesOrNot.equals("O")){
-                        remboursement = true;
+                    if(!noteDeFrais.equals(0.0)) {
+                        System.out.println("Le remboursement a t il été effectué?O/N");
+                        scanner.nextLine();
+                        String yesOrNot = scanner.nextLine();
+
+                        if (yesOrNot.equals("O")) {
+                            remboursement = true;
+                        } else {
+                            remboursement = false;
+                        }
                     }else{
                         remboursement = false;
                     }
@@ -217,11 +209,38 @@ public class Main {
                     );
 
                     dbConnection.insert(collaborateur);
+
+                    if(!noteDeFrais.equals(0.0)){
+                        System.out.println("Le commercial participe t il a une soirée?O/N");
+                        String yesOrNotCom = scanner.nextLine();
+
+                        if(yesOrNotCom.equals("O")) {
+
+                            System.out.println("Adresse de l'evènement :");
+                            String adresse = scanner.nextLine();
+
+                            System.out.println("Nom de la molécule testée :");
+                            String moleculeTestee = scanner.nextLine();
+
+                            System.out.println("Indiquez la date de la soirée : ");
+                            String dateSoiree = scanner.nextLine();
+
+                            System.out.println("Heure de début de soirée");
+                            String debutSoiree = scanner.nextLine();
+
+                            System.out.println("Heure de fin de soirée");
+                            String finSoiree = scanner.nextLine();
+
+                            Evenement evenement = new Soiree(adresse, moleculeTestee, dateSoiree,
+                                    debutSoiree, finSoiree);
+
+                            dbConnection.insert(evenement);
+
+                            dbConnection.insertCommercialEvenement(collaborateur, evenement);
+                        }
+
+                    }
                 }
-
-
-
-
         }
     }
 }
