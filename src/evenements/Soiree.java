@@ -9,7 +9,7 @@ public class Soiree extends Evenement{
 	private Time	heureFinSoiree;
 
 	public Soiree(String adresse, String moleculeTestee, Date dateSoiree, Time heureDebutSoiree, Time heureFinSoiree){
-		super(adresse, moleculeTestee);
+		super(id, adresse, moleculeTestee);
 	
 		this.dateSoiree = dateSoiree;
 		this.heureDebutSoiree = heureDebutSoiree;
