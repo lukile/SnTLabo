@@ -1,13 +1,23 @@
 package evenements;
 
 public class Evenement {
+	protected  static int		id;
 	protected String	adresse;
 	protected String	moleculeTestee;
 
-	public Evenement(String adresse, String moleculeTestee){
+	public Evenement(int id, String adresse, String moleculeTestee){
 
+		this.id = id;
 		this.adresse = adresse;
 		this.moleculeTestee = moleculeTestee;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getAdresse() {
@@ -29,8 +39,8 @@ public class Evenement {
 	@Override
 	public String toString() {
 		return "Evenement : " 
-				+ " lieu événement = " + adresse
-				+ ", molécule testée = " + moleculeTestee;
+				+ " lieu ï¿½vï¿½nement = " + adresse
+				+ ", molï¿½cule testï¿½e = " + moleculeTestee;
 	}
 	
 }
