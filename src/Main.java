@@ -3,6 +3,7 @@ import employes.Collaborateur;
 import employes.Commercial;
 import employes.Medecin;
 import employes.Scientifique;
+import unite.Unite;
 
 import javax.sound.midi.Soundbank;
 import java.sql.Connection;
@@ -30,7 +31,7 @@ public class Main {
             case 1:
                 System.out.println("Voulez vous enregistrer :\n" +
                                     "1 - Un médecin\n" +
-                                    "2 - Un scientifiue\n" +
+                                    "2 - Un scientifique\n" +
                                     "3 - Un commercial?\n");
 
                 int choice = scanner.nextInt();
@@ -86,12 +87,12 @@ public class Main {
                         essaiClinique = false;
                     }
 
-                    Collaborateur collaborateur = new Medecin(
-                            nom, prenom, email, telephone,
-                            codeProjet, dateEmbauche, ville, salaire,
-                            prime, essaiClinique, debutEssaiClinque, finEssaiClinque
-                    );
-                    dbConnection.insert(collaborateur);
+//                    Collaborateur collaborateur = new Medecin(
+//                            nom, prenom, email, telephone,
+//                            codeProjet, dateEmbauche, ville, salaire,
+//                            prime, essaiClinique, debutEssaiClinque, finEssaiClinque
+//                    );
+//                    dbConnection.insert(collaborateur);
 
                 }else if(choice == 2){
                     System.out.println("Salaire : ");
@@ -99,6 +100,7 @@ public class Main {
 
                     System.out.println("Prime : ");
                     Double prime = scanner.nextDouble();
+
 
                     System.out.println("Le Scientifique est il responsable d'une unité?O/N");
                     scanner.nextLine();
@@ -118,6 +120,46 @@ public class Main {
                             prime, responsable
                     );
                     dbConnection.insert(collaborateur);
+
+
+                    System.out.println("Le scientifique est il affecté à une unité?O/N");
+                    String yesOrNotU = scanner.nextLine();
+
+                    if(yesOrNotU.equals("O")){
+                        System.out.println("Renseignez le nom de l'unité :");
+                        String nomUnite = scanner.nextLine();
+//                        String nomUnite = "Unite centrale";
+
+                        System.out.println("N° de rue :");
+                        String numRue = scanner.nextLine();
+//                        String numRue = "3bis";
+
+                        System.out.println("Nom de la rue :");
+                        String nomRue = scanner.nextLine();
+//                        String nomRue = "rue de la Girouette";
+
+                        System.out.println("Code Postal :");
+                        int cp = scanner.nextInt();
+//                        int cp = 74321;
+
+                        System.out.println("Ville :");
+                        scanner.nextLine();
+                        String villeU = scanner.nextLine();
+//                        String villeU = "Rouen";
+
+                        System.out.println("Date de la prise de la prise de responsabilité du scientifique (0 si le scientifique n'est pas responsable de l'unité):");
+                        String dateResponsabiliteSC = scanner.nextLine();
+
+//                        String dateResponsabiliteSC = "12/07/2012";
+
+                        Unite unite = new Unite(
+                                nomUnite, numRue, nomRue, cp,
+                                villeU, dateResponsabiliteSC
+                        );
+                        dbConnection.insert(unite, collaborateur);
+                    }
+
+
 
                 }else if(choice == 3){
                     System.out.println("Salaire :");
