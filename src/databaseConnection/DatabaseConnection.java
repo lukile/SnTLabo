@@ -4,6 +4,8 @@ import employes.Collaborateur;
 import employes.Commercial;
 import employes.Medecin;
 import employes.Scientifique;
+import evenements.Congres;
+import evenements.Evenement;
 import unite.Unite;
 
 import java.sql.*;
@@ -164,6 +166,78 @@ public class DatabaseConnection {
             return statement.execute();
 
         } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean insert(Evenement evenement){
+        initConnection();
+
+        try{
+            String insert = "INSERT INTO evenement(adresse, moleculeTestee)" +
+                    "VALUES(?, ?);";
+            PreparedStatement statement = connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
+
+            statement.setString(1, evenement.getAdresse());
+            statement.setString(2, evenement.getMoleculeTestee());
+
+            statement.execute();
+
+            ResultSet generetedKeys = statement.getGeneratedKeys();
+            int evenementId;
+            if(generetedKeys.next()){
+                evenementId = generetedKeys.getInt(1);
+                evenement.setId(evenementId);
+            }
+
+            if (evenement instanceof Congres){
+                this.insert((Congres) evenement);
+            }
+        }catch(SQLException e){
+            unchecked(() -> connection.rollback());
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    public boolean insert(Collaborateur collaborateur, Evenement evenement){
+        initConnection();
+
+        try{
+            String insert = "INSERT INTO medecin_evenement(idMedecin, idEvenement)" +
+                    "VALUES (?, ?);";
+
+            PreparedStatement statement = connection.prepareStatement(insert);
+
+            statement.setInt(1, collaborateur.getNumeroIdentification());
+            statement.setInt(2, evenement.getId());
+
+            return statement.execute();
+
+        } catch (SQLException e) {
+            unchecked(() -> connection.rollback());
+
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    private boolean insert(Congres congres){
+        try{
+            String insert = "INSERT INTO congres(idEvenement, dateDebutCongres, dateFinCongres)" +
+                    "VALUES(?, ?, ?);";
+
+            PreparedStatement statement = connection.prepareStatement(insert);
+
+            statement.setInt(1, congres.getId());
+            statement.setString(2, congres.getDateDebutCongres());
+            statement.setString(3, congres.getDateFinCongres());
+
+            return statement.execute();
+
+        }catch(SQLException e){
             e.printStackTrace();
             return false;
         }
