@@ -7,19 +7,22 @@ public class Unite{
 	private String 		nomRue;
 	private int 		codePostal;
 	private String 		ville;
+	private String 		dateResponsabilite;
 	
 	public Unite(
 			String nomUnite, 
 			String numeroRue, 
 			String nomRue, 
 			int codePostal, 
-			String ville){
+			String ville,
+			String dateResponsabilite){
 		
 		this.nomUnite = nomUnite;
 		this.numeroRue = numeroRue;
 		this.nomRue = nomRue;
 		this.codePostal = codePostal;
 		this.ville = ville;
+		this.dateResponsabilite = dateResponsabilite;
 	}
 
 	public String getNomUnite() {
@@ -62,14 +65,31 @@ public class Unite{
 		this.ville = ville;
 	}
 
+	public String getVille() {
+		return ville;
+	}
+
+	public void setVille(String ville) {
+		this.ville = ville;
+	}
+
+	public String getDateResponsabilite() {
+		return dateResponsabilite;
+	}
+
+	public void setDateResponsabilite(String dateResponsabilite) {
+		this.dateResponsabilite = dateResponsabilite;
+	}
+
 	@Override
 	public String toString() {
 		return "Unite : "
-				+ "nom de l'unité = " + nomUnite 
+				+ "nom de l'unitï¿½ = " + nomUnite 
 				+ ", numero de rue = " + numeroRue 
 				+ ", nom de rue = " + nomRue + 
 				", code postal = " + codePostal 
-				+ ", ville = " + ville;
+				+ ", ville = " + ville
+				+ ", date responsabilitÃ©s = " + dateResponsabilite;
 	}
 	
 }
