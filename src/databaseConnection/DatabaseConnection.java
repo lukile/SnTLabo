@@ -6,6 +6,7 @@ import employes.Medecin;
 import employes.Scientifique;
 import evenements.Congres;
 import evenements.Evenement;
+import evenements.Soiree;
 import unite.Unite;
 
 import java.sql.*;
@@ -193,7 +194,10 @@ public class DatabaseConnection {
 
             if (evenement instanceof Congres){
                 this.insert((Congres) evenement);
+            }else if(evenement instanceof Soiree){
+                this.insert((Soiree) evenement);
             }
+
         }catch(SQLException e){
             unchecked(() -> connection.rollback());
             e.printStackTrace();
@@ -202,7 +206,7 @@ public class DatabaseConnection {
         return true;
     }
 
-    public boolean insert(Collaborateur collaborateur, Evenement evenement){
+    public boolean insertMedecinEvenement(Collaborateur collaborateur, Evenement evenement){
         initConnection();
 
         try{
@@ -242,4 +246,48 @@ public class DatabaseConnection {
             return false;
         }
     }
+
+    private boolean insert(Soiree soiree){
+        try{
+            String insert = "INSERT INTO soiree(idEvenement, dateSoiree, heureDebutSoiree, heureFinSoiree)" +
+                    "VALUES(?, ?, ?, ?);";
+
+            PreparedStatement statement = connection.prepareStatement(insert);
+
+            statement.setInt(1, soiree.getId());
+            statement.setString(2, soiree.getDateSoiree());
+            statement.setString(3, soiree.getHeureDebutSoiree());
+            statement.setString(4, soiree.getHeureFinSoiree());
+
+            return statement.execute();
+
+        }catch(SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean insertCommercialEvenement(Collaborateur collaborateur, Evenement evenement){
+        initConnection();
+
+        try{
+            String insert = "INSERT INTO commercial_evenement(idCommercial, idEvenement)" +
+                    "VALUES (?, ?);";
+
+            PreparedStatement statement = connection.prepareStatement(insert);
+
+            statement.setInt(1, collaborateur.getNumeroIdentification());
+            statement.setInt(2, evenement.getId());
+
+            return statement.execute();
+
+        } catch (SQLException e) {
+            unchecked(() -> connection.rollback());
+
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
 }
