@@ -3,6 +3,8 @@ import employes.Collaborateur;
 import employes.Commercial;
 import employes.Medecin;
 import employes.Scientifique;
+import evenements.Congres;
+import evenements.Evenement;
 import unite.Unite;
 
 import javax.sound.midi.Soundbank;
@@ -87,12 +89,41 @@ public class Main {
                         essaiClinique = false;
                     }
 
-//                    Collaborateur collaborateur = new Medecin(
-//                            nom, prenom, email, telephone,
-//                            codeProjet, dateEmbauche, ville, salaire,
-//                            prime, essaiClinique, debutEssaiClinque, finEssaiClinque
-//                    );
-//                    dbConnection.insert(collaborateur);
+                    Collaborateur collaborateur = new Medecin(
+                            nom, prenom, email, telephone,
+                            codeProjet, dateEmbauche, ville, salaire,
+                            prime, essaiClinique, debutEssaiClinque, finEssaiClinque
+                    );
+                    dbConnection.insert(collaborateur);
+
+                    System.out.println("Le médecin partitipe t il a un congrès?O/N");
+                    String yesOrNotC = scanner.nextLine();
+
+                    if(yesOrNotC.equals("O")){
+
+                        System.out.println("Adresse de l'evènement :");
+                        String adresse = scanner.nextLine();
+//                        String adresse = "7 rue des babouins 99999 BABINOUCHET";
+
+                        System.out.println("Nom de la molécule testée :");
+                        String moleculeTestee = scanner.nextLine();
+//                        String moleculeTestee = "Polyglycérine";
+
+                        System.out.println("Date de début du congrès");
+                        String dateDebutCongres = scanner.nextLine();
+//                        String dateDebutCongres = "23/02/2123";
+
+                        System.out.println("Date de fin de congrès");
+                        String dateFinCongres = scanner.nextLine();
+//                        String dateFinCongres = "23/04/2123";
+
+                                Evenement evenement = new Congres(adresse, moleculeTestee,
+                                dateDebutCongres, dateFinCongres);
+
+                        dbConnection.insert(evenement);
+
+                        dbConnection.insert(collaborateur, evenement);
+                    }
 
                 }else if(choice == 2){
                     System.out.println("Salaire : ");
