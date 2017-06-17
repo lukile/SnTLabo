@@ -4,11 +4,11 @@ import java.sql.Date;
 import java.sql.Time;
 
 public class Soiree extends Evenement{
-	private Date 	dateSoiree;
-	private Time 	heureDebutSoiree;
-	private Time	heureFinSoiree;
+	private String 	dateSoiree;
+	private String 	heureDebutSoiree;
+	private String	heureFinSoiree;
 
-	public Soiree(String adresse, String moleculeTestee, Date dateSoiree, Time heureDebutSoiree, Time heureFinSoiree){
+	public Soiree(String adresse, String moleculeTestee, String dateSoiree, String heureDebutSoiree, String heureFinSoiree){
 		super(id, adresse, moleculeTestee);
 	
 		this.dateSoiree = dateSoiree;
@@ -16,29 +16,29 @@ public class Soiree extends Evenement{
 		this.heureFinSoiree = heureFinSoiree;
 	}
 	
-	public Date getDateSoiree() {
+	public String getDateSoiree() {
 		return dateSoiree;
 	}
 
 
-	public void setDateSoiree(Date dateSoiree) {
+	public void setDateSoiree(String dateSoiree) {
 		this.dateSoiree = dateSoiree;
 	}
 
 
-	public Time getHeureDebutSoiree() {
+	public String getHeureDebutSoiree() {
 		return heureDebutSoiree;
 	}
 
-	public void setHeureDebutSoiree(Time heureDebutSoiree) {
+	public void setHeureDebutSoiree(String heureDebutSoiree) {
 		this.heureDebutSoiree = heureDebutSoiree;
 	}
 
-	public Time getHeureFinSoiree() {
+	public String getHeureFinSoiree() {
 		return heureFinSoiree;
 	}
 
-	public void setHeureFinSoiree(Time heureFinSoiree) {
+	public void setHeureFinSoiree(String heureFinSoiree) {
 		this.heureFinSoiree = heureFinSoiree;
 	}
 
