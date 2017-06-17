@@ -4,6 +4,7 @@ import employes.Collaborateur;
 import employes.Commercial;
 import employes.Medecin;
 import employes.Scientifique;
+import unite.Unite;
 
 import java.sql.*;
 
@@ -134,6 +135,31 @@ public class DatabaseConnection {
             statement.setDouble(2, commercial.getSalaire());
             statement.setDouble(3, commercial.getNoteDeFrais());
             statement.setBoolean(4, commercial.isRemboursement());
+
+            return statement.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean insert(Unite unite, Collaborateur collaborateur){
+        initConnection();
+
+        try{
+            String insert = "INSERT INTO unite(nomUnite, numeroRue, nomRue, codePostal, villeUnite, dateResponsabilite, nIdentificationSC)" +
+                    "VALUES(?, ?, ?, ?, ?, ?, ?);";
+
+            PreparedStatement statement = connection.prepareStatement(insert);
+
+            statement.setString(1, unite.getNomUnite());
+            statement.setString(2, unite.getNumeroRue());
+            statement.setString(3, unite.getNomRue());
+            statement.setInt(4, unite.getCodePostal());
+            statement.setString(5, unite.getVille());
+            statement.setString(6, unite.getDateResponsabilite());
+            statement.setInt(7, collaborateur.getNumeroIdentification());
 
             return statement.execute();
 
