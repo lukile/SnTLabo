@@ -10,6 +10,7 @@ import unite.Unite;
 
 import javax.sound.midi.Soundbank;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.DoubleSummaryStatistics;
 import java.util.Scanner;
 
@@ -372,8 +373,49 @@ public class Main {
 
                     collaborateur.setNumeroIdentification(nIdentification);
                     dbConnection.update(collaborateur);
-                }
 
+                }
+                break;
+
+            case 3:
+                System.out.println("Quel collaborateur voulez vous supprimer?\n" +
+                        "1 - Un médecin\n" +
+                        "2 - Un scientifique\n" +
+                        "3 - Un commercial");
+
+                int choiceDelete = scanner.nextInt();
+
+
+                if (choiceDelete == 1) {
+                    System.out.println("Veuillez saisir le numero d'identification du collaborateur à supprimer");
+                    int numeroIdentification = scanner.nextInt();
+
+                    dbConnection.deleteMedecinEvenement(numeroIdentification);
+                    dbConnection.deleteMedecin(numeroIdentification);
+                    dbConnection.deleteCollaborateur(numeroIdentification);
+
+                } else if (choiceDelete == 2) {
+                    System.out.println("Veuillez saisir le numero d'identification du collaborateur à supprimer");
+                    int numeroIdentification = scanner.nextInt();
+
+                    dbConnection.deleteScUnite(numeroIdentification);
+                    dbConnection.deleteScientifique(numeroIdentification);
+                    dbConnection.deleteCollaborateur(numeroIdentification);
+
+                } else if (choiceDelete == 3) {
+                    System.out.println("Veuillez saisir le numero d'identification du collaborateur à supprimer");
+                    int numeroIdentification = scanner.nextInt();
+
+                    dbConnection.deleteComEvenement(numeroIdentification);
+                    dbConnection.deleteCommercial(numeroIdentification);
+                    dbConnection.deleteCollaborateur(numeroIdentification);
+                }else{
+                    System.out.println("Ce collaborateur n'existe pas");
+                }
+            break;
+
+//            case 4:
+//                System.out.println("Saisissez le numero d'identific");
         }
 
     }
