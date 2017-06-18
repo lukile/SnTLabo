@@ -1,7 +1,8 @@
 package unite;
 
 public class Unite{
-	
+
+	private static int	id;
 	private String 		nomUnite;
 	private String 		numeroRue;
 	private String 		nomRue;
@@ -10,19 +11,28 @@ public class Unite{
 	private String 		dateResponsabilite;
 	
 	public Unite(
+
 			String nomUnite, 
 			String numeroRue, 
 			String nomRue, 
 			int codePostal, 
 			String ville,
 			String dateResponsabilite){
-		
+
 		this.nomUnite = nomUnite;
 		this.numeroRue = numeroRue;
 		this.nomRue = nomRue;
 		this.codePostal = codePostal;
 		this.ville = ville;
 		this.dateResponsabilite = dateResponsabilite;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getNomUnite() {
