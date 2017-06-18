@@ -1,6 +1,5 @@
 package databaseConnection;
 
-import com.sun.org.apache.regexp.internal.REUtil;
 import employes.Collaborateur;
 import employes.Commercial;
 import employes.Medecin;
@@ -11,6 +10,8 @@ import evenements.Soiree;
 import unite.Unite;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseConnection {
 
@@ -75,10 +76,10 @@ public class DatabaseConnection {
         String pwd = "";
 
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            this.connection = DriverManager.getConnection(url, login, pwd);
-
-        } catch (SQLException | ClassNotFoundException e) {
+            if (this.connection == null || this.connection.isClosed()) {
+                this.connection = DriverManager.getConnection(url, login, pwd);
+            }
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -561,10 +562,167 @@ public class DatabaseConnection {
         }
     }
 
-//    public boolean displayMedecin(){
-//        initConnection();
-//
-//        String display = "SELECT * FROM "
-//    }
+    public List<Collaborateur> findCollaborateur(int numeroIdentification) {
+        List<Collaborateur> results = new ArrayList<>();
+        initConnection();
+        try {
+            String request = "SELECT * FROM collaborateur " +
+                    "WHERE numeroIdentification = ?;";
+
+            PreparedStatement statement = connection.prepareStatement(request);
+
+            statement.setInt(1, numeroIdentification);
+
+            ResultSet result = statement.executeQuery();
+            while(result.next()) {
+                String nom = result.getString(2);
+                String prenom = result.getString(3);
+                String email = result.getString(4);
+                String telephone = result.getString(5);
+                int codeProjet = result.getInt(6);
+                String dateEmbauche = result.getString(7);
+                String ville = result.getString(8);
+
+                Collaborateur collaborateur = new Collaborateur(nom, prenom, email,
+                        telephone, codeProjet, dateEmbauche, ville);
+
+                collaborateur.setNumeroIdentification(numeroIdentification);
+                if (existsIn("medecin", collaborateur)) {
+                    collaborateur = getMedecin(collaborateur);
+                } else if (existsIn("commercial", collaborateur)) {
+                    collaborateur = getCommercial(collaborateur);
+                } else if (existsIn("scientifique", collaborateur)){
+                    collaborateur = getScientifique(collaborateur);
+                }
+
+                results.add(collaborateur);
+            }
+
+            return results;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+
+    private Collaborateur getCommercial(Collaborateur collaborateur) {
+        initConnection();
+        String request = "SELECT c.salaire as salaire, c.noteDeFrais as noteDeFrais, c.remboursement as remboursement " +
+                "FROM commercial c " +
+                "WHERE c.nIdentification = ?";
+
+        PreparedStatement statement;
+
+        try {
+            statement = connection.prepareStatement(request);
+            statement.setInt(1, collaborateur.getNumeroIdentification());
+
+            ResultSet result = statement.executeQuery();
+
+            if (result.next()) {
+                Double salaire = result.getDouble("salaire");
+                Double noteDeFrais = result.getDouble("noteDeFrais");
+                boolean remboursement = result.getBoolean("remboursement");
+
+                Commercial commercial = new Commercial(collaborateur, noteDeFrais, remboursement);
+                commercial.setSalaire(salaire);
+                return commercial;
+            }
+            return null;
+        }catch (SQLException e) {
+                e.printStackTrace();
+                return null;
+            }
+    }
+
+    private Medecin getMedecin(Collaborateur collaborateur) {
+        initConnection();
+        String request = "SELECT m.salaire as salaire, m.prime as prime, m.essaiClinique as essaiClinique, " +
+                "m.debutEssaiClinique as debutEssaiClinique, m.finEssaiClinique as finEssaiClinique " +
+                "FROM sntlabo.medecin m " +
+                "WHERE m.nIdentification = ?";
+
+        PreparedStatement statement;
+        try {
+            statement = connection.prepareStatement(request);
+            statement.setInt(1, collaborateur.getNumeroIdentification());
+
+            ResultSet result = statement.executeQuery();
+
+            if (result.next()) {
+                Double salaire = result.getDouble("salaire");
+                Double prime = result.getDouble("prime");
+                boolean essaiClinique = result.getBoolean("essaiClinique");
+                String debutEssaiClinique = result.getString("debutEssaiClinique");
+                String finEssaiClinique = result.getString("finEssaiClinique");
+
+                Medecin medecin = new Medecin(collaborateur, prime, essaiClinique, debutEssaiClinique, finEssaiClinique);
+                medecin.setSalaire(salaire);
+                return medecin;
+            }
+            return null;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private Scientifique getScientifique(Collaborateur collaborateur){
+        initConnection();
+
+        String request = "SELECT s.salaire as salaire, s.prime as prime, s.responsable as responsable " +
+                "FROM scientifique s " +
+                "WHERE s.nIdentification = ?";
+
+        PreparedStatement statement;
+
+        try{
+            statement = connection.prepareStatement(request);
+            statement.setInt(1, collaborateur.getNumeroIdentification());
+
+            ResultSet result = statement.executeQuery();
+
+            if(result.next()){
+
+                Double salaire = result.getDouble("salaire");
+                Double prime = result.getDouble("prime");
+                boolean responsable = result.getBoolean("responsable");
+
+                Scientifique scientifique = new Scientifique(collaborateur, prime, responsable);
+                scientifique.setSalaire(salaire);
+                return scientifique;
+            }
+            return null;
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private boolean existsIn(String tableName, Collaborateur collaborateur) {
+        initConnection();
+        String request = "SELECT count(*) as isKindOf FROM " + tableName + " m " +
+                "WHERE nIdentification = ?";
+
+        PreparedStatement statement;
+        try {
+            statement = connection.prepareStatement(request);
+            statement.setInt(1, collaborateur.getNumeroIdentification());
+
+            ResultSet result = statement.executeQuery();
+            if (result.next()) {
+                int isKindOf = result.getInt("isKindOf");
+
+                return isKindOf > 0;
+            }
+            return false;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 
 }
