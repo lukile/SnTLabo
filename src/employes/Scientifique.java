@@ -66,6 +66,7 @@ public class Scientifique extends Collaborateur{
 		LocalDate date3 = dateEmb.plusYears(3);
 		LocalDate date4 = dateEmb.plusYears(4);
 		LocalDate date5 = dateEmb.plusYears(5);
+		LocalDate date6 = dateEmb.plusYears(6);
 
 		if(date5.compareTo(currentDate) < 0){
 			this.salaire += 5000;
@@ -77,7 +78,7 @@ public class Scientifique extends Collaborateur{
 			this.salaire += 2000;
 		}else if(date1.compareTo(currentDate) < 0){
 			this.salaire += 1000;
-		}else if(dateEmb.compareTo(currentDate) > 0){
+		}else if(date6.compareTo(currentDate) < 0){
 			this.salaire = 10000.0;
 		}
 
