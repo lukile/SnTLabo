@@ -289,5 +289,112 @@ public class DatabaseConnection {
         }
     }
 
+    public boolean update(Collaborateur collaborateur) {
+        initConnection();
+
+        try {
+            String update = "UPDATE collaborateur " +
+                    "SET nom = ?, prenom = ?, email = ?, telephone = ?, codeProjet = ?, dateEmbauche = ?, ville = ?" +
+                    "WHERE numeroIdentification = ?";
+
+            PreparedStatement statement = connection.prepareStatement(update);
+
+            statement.setString(1, collaborateur.getNom());
+            statement.setString(2, collaborateur.getTelephone());
+            statement.setString(3, collaborateur.getEmail());
+            statement.setString(4, collaborateur.getTelephone());
+            statement.setInt(5, collaborateur.getCodeProjet());
+            statement.setString(6, collaborateur.getDateEmbauche());
+            statement.setString(7, collaborateur.getVille());
+            statement.setInt(8, collaborateur.getNumeroIdentification());
+
+            statement.execute();
+
+            if(collaborateur instanceof Medecin){
+                this.update((Medecin) collaborateur);
+            }else if(collaborateur instanceof Scientifique){
+                this.update((Scientifique) collaborateur);
+            }else if(collaborateur instanceof Commercial){
+                this.update((Commercial) collaborateur);
+            }
+
+        } catch (SQLException e) {
+            unchecked(() -> connection.rollback());
+
+            e.printStackTrace();
+            return false;
+
+        } finally {
+        unchecked(() -> connection.close());
+        }
+        return true;
+    }
+
+    private boolean update(Medecin medecin){
+        try {
+            String update = "UPDATE medecin " +
+                    "SET salaire = ?, prime = ?, essaiClinique = ? , debutEssaiClinique = ?, " +
+                    "finEssaiClinique = ? " +
+                    "WHERE nIdentification = ?";
+
+            PreparedStatement statement = connection.prepareStatement(update);
+
+            statement.setDouble(1, medecin.getSalaire());
+            statement.setDouble(2, medecin.getPrime());
+            statement.setBoolean(3, medecin.isEssaiClinique());
+            statement.setString(4, medecin.getDebutEssaiClinique());
+            statement.setString(5, medecin.getFinEssaiClinique());
+            statement.setInt(6, medecin.getNumeroIdentification());
+
+            return statement.execute();
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    private boolean update(Scientifique scientifique){
+        try{
+            String update = "UPDATE scientifique " +
+                    "SET salaire = ?, prime = ?, responsable = ? " +
+                    "WHERE nIdentification = ?";
+
+            PreparedStatement statement = connection.prepareStatement(update);
+
+            statement.setDouble(1, scientifique.getSalaire());
+            statement.setDouble(2, scientifique.getPrime());
+            statement.setBoolean(3, scientifique.isResponsable());
+            statement.setInt(4, scientifique.getNumeroIdentification());
+
+            return statement.execute();
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    private boolean update(Commercial commercial){
+        try{
+            String update = "UPDATE commercial " +
+                    "SET salaire = ?, noteDeFrais = ?, remboursement = ? " +
+                    "WHERE nIdentification = ?";
+
+            PreparedStatement statement = connection.prepareStatement(update);
+
+            statement.setDouble(1, commercial.getSalaire());
+            statement.setDouble(2, commercial.getNoteDeFrais());
+            statement.setBoolean(3, commercial.isRemboursement());
+            statement.setInt(4, commercial.getNumeroIdentification());
+
+            return statement.execute();
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 
 }
