@@ -8,10 +8,7 @@ import evenements.Evenement;
 import evenements.Soiree;
 import unite.Unite;
 
-import javax.sound.midi.Soundbank;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.DoubleSummaryStatistics;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -94,9 +91,10 @@ public class Main {
 
                     Collaborateur collaborateur = new Medecin(
                             nom, prenom, email, telephone,
-                            codeProjet, dateEmbauche, ville, salaire,
+                            codeProjet, dateEmbauche, ville,
                             prime, essaiClinique, debutEssaiClinque, finEssaiClinque
                     );
+                    collaborateur.setSalaire(salaire);
                     dbConnection.insert(collaborateur);
 
                     System.out.println("Le médecin partitipe t il a un congrès?O/N");
@@ -128,59 +126,65 @@ public class Main {
                     System.out.println("Salaire : ");
                     Double salaire = scanner.nextDouble();
 
-                    System.out.println("Prime : ");
-                    Double prime = scanner.nextDouble();
+                    if(salaire < 4000.0 || salaire > 5000.0)
+                        System.out.println("Le salaire d'un scientifique ne peut pas être inférieur a 4000€ ni supérieur à 5000€");
+                    else {
+
+                        System.out.println("Prime : ");
+                        Double prime = scanner.nextDouble();
 
 
-                    System.out.println("Le Scientifique est il responsable d'une unité?O/N");
-                    scanner.nextLine();
-                    String yesOrNot = scanner.nextLine();
-
-                    boolean responsable = false;
-
-                    if(yesOrNot.equals("O")){
-                        responsable = true;
-                    }else{
-                        responsable = false;
-                    }
-
-                    Collaborateur collaborateur = new Scientifique(
-                            nom, prenom, email, telephone,
-                            codeProjet, dateEmbauche, ville, salaire,
-                            prime, responsable
-                    );
-                    dbConnection.insert(collaborateur);
-
-
-                    System.out.println("Le scientifique est il affecté à une unité?O/N");
-                    String yesOrNotU = scanner.nextLine();
-
-                    if(yesOrNotU.equals("O")){
-                        System.out.println("Renseignez le nom de l'unité :");
-                        String nomUnite = scanner.nextLine();
-
-                        System.out.println("N° de rue :");
-                        String numRue = scanner.nextLine();
-
-                        System.out.println("Nom de la rue :");
-                        String nomRue = scanner.nextLine();
-
-                        System.out.println("Code Postal :");
-                        int cp = scanner.nextInt();
-
-                        System.out.println("Ville :");
+                        System.out.println("Le Scientifique est il responsable d'une unité?O/N");
                         scanner.nextLine();
-                        String villeU = scanner.nextLine();
+                        String yesOrNot = scanner.nextLine();
 
-                        System.out.println("Date de la prise de la prise de responsabilité du scientifique (0 si le scientifique n'est pas responsable de l'unité):");
-                        String dateResponsabiliteSC = scanner.nextLine();
+                        boolean responsable = false;
 
-                        Unite unite = new Unite(
-                                nomUnite, numRue, nomRue, cp,
-                                villeU, dateResponsabiliteSC
+                        if (yesOrNot.equals("O")) {
+                            responsable = true;
+                        } else {
+                            responsable = false;
+                        }
+
+                        Collaborateur collaborateur = new Scientifique(
+                                nom, prenom, email, telephone,
+                                codeProjet, dateEmbauche, ville,
+                                prime, responsable
                         );
-                        dbConnection.insert(unite);
-                        dbConnection.insertScUnite(collaborateur, unite);
+                        collaborateur.setSalaire(salaire);
+                        dbConnection.insert(collaborateur);
+
+
+                        System.out.println("Le scientifique est il affecté à une unité?O/N");
+                        String yesOrNotU = scanner.nextLine();
+
+                        if (yesOrNotU.equals("O")) {
+                            System.out.println("Renseignez le nom de l'unité :");
+                            String nomUnite = scanner.nextLine();
+
+                            System.out.println("N° de rue :");
+                            String numRue = scanner.nextLine();
+
+                            System.out.println("Nom de la rue :");
+                            String nomRue = scanner.nextLine();
+
+                            System.out.println("Code Postal :");
+                            int cp = scanner.nextInt();
+
+                            System.out.println("Ville :");
+                            scanner.nextLine();
+                            String villeU = scanner.nextLine();
+
+                            System.out.println("Date de la prise de la prise de responsabilité du scientifique (0 si le scientifique n'est pas responsable de l'unité):");
+                            String dateResponsabiliteSC = scanner.nextLine();
+
+                            Unite unite = new Unite(
+                                    nomUnite, numRue, nomRue, cp,
+                                    villeU, dateResponsabiliteSC
+                            );
+                            dbConnection.insert(unite);
+                            dbConnection.insertScUnite(collaborateur, unite);
+                        }
                     }
 
                 }else if(choice == 3){
@@ -207,10 +211,11 @@ public class Main {
                     }
                     Collaborateur collaborateur = new Commercial(
                             nom, prenom, email, telephone,
-                            codeProjet, dateEmbauche, ville, salaire,
+                            codeProjet, dateEmbauche, ville,
                             noteDeFrais, remboursement
                     );
 
+                    collaborateur.setSalaire(salaire);
                     dbConnection.insert(collaborateur);
 
                     if(!noteDeFrais.equals(0.0)){
@@ -310,10 +315,12 @@ public class Main {
 
                     Collaborateur collaborateur = new Medecin(
                             newName, newSurname, newMail, newPhone, newCodeProjet,
-                            newDate, newVille, newSalaire, newPrime,
+                            newDate, newVille, newPrime,
                             newEssaiClinique, newDebutEssai, newFinEssai
                     );
+
                     collaborateur.setNumeroIdentification(nIdentification);
+                    collaborateur.setSalaire(newSalaire);
                     dbConnection.update(collaborateur);
 
                 }else if(choiceUpdate == 2){
@@ -338,9 +345,12 @@ public class Main {
                     Collaborateur collaborateur = new Scientifique(
                             newName, newSurname, newMail, newPhone,
                             newCodeProjet, newDate, newVille,
-                            newSalaire, newPrime, responsable
+                            newPrime, responsable
                     );
+
                     collaborateur.setNumeroIdentification(nIdentification);
+                    collaborateur.setSalaire(newSalaire);
+
                     dbConnection.update(collaborateur);
 
                 }else if(choiceUpdate == 3){
@@ -367,11 +377,12 @@ public class Main {
                     }
                     Collaborateur collaborateur = new Commercial(
                             newName, newSurname, newMail, newPhone,
-                            newCodeProjet, newDate, newVille, newSalaire,
+                            newCodeProjet, newDate, newVille,
                             newNoteFrais, remboursement
                     );
 
                     collaborateur.setNumeroIdentification(nIdentification);
+                    collaborateur.setSalaire(newSalaire);
                     dbConnection.update(collaborateur);
 
                 }
@@ -414,8 +425,30 @@ public class Main {
                 }
             break;
 
-//            case 4:
-//                System.out.println("Saisissez le numero d'identific");
+            case 4:
+                System.out.println("Saisissez le numero d'identification du collaborateur à afficher : ");
+
+                int numIdentification = scanner.nextInt();
+
+                List<Collaborateur> collaborateurs = dbConnection.findCollaborateur(numIdentification);
+
+                for (Collaborateur collaborateur : collaborateurs) {
+                    System.out.println(collaborateur);
+                }
+                break;
+
+            case 5:
+                    System.out.println("Saisissez le numero d'identification du collaborateur :");
+
+                    int numeroId = scanner.nextInt();
+
+                    List<Collaborateur> collab = dbConnection.findCollaborateur(numeroId);
+
+                    for(Collaborateur collaborateur : collab){
+                        System.out.println(collaborateur.getComputedSalaire());
+                    }
+
+
         }
 
     }
