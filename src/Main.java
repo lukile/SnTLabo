@@ -10,6 +10,7 @@ import unite.Unite;
 
 import javax.sound.midi.Soundbank;
 import java.sql.Connection;
+import java.util.DoubleSummaryStatistics;
 import java.util.Scanner;
 
 public class Main {
@@ -241,6 +242,138 @@ public class Main {
 
                     }
                 }
+                break;
+
+            case 2:
+                System.out.println("Quel collaborateur souhaitez vous modifier?:\n" +
+                        "1 - Un médecin\n" +
+                        "2 - Un scientifique\n" +
+                        "3 - Un commercial\n");
+
+                int choiceUpdate = scanner.nextInt();
+
+                System.out.println("Saisissez le numero d'identification du collaborateur à modifier :");
+                int nIdentification = scanner.nextInt();
+
+                System.out.println("Nouveau nom :");
+                scanner.nextLine();
+                String newName = scanner.nextLine();
+
+                System.out.println("Nouveau prénom :");
+                String newSurname = scanner.nextLine();
+
+                System.out.println("Nouvel email :");
+                String newMail = scanner.nextLine();
+
+                System.out.println("Nouveau numero de téléphone :");
+                String newPhone = scanner.nextLine();
+
+                System.out.println("Nouveau code projet :");
+                int newCodeProjet = scanner.nextInt();
+
+                System.out.println("Correction de la date d'embauche :");
+                scanner.nextLine();
+                String newDate = scanner.nextLine();
+
+                System.out.println("Nouvelle ville : ");
+                String newVille = scanner.nextLine();
+
+                if(choiceUpdate == 1){
+                    System.out.println("Nouveau salaire : ");
+                    Double newSalaire = scanner.nextDouble();
+
+                    System.out.println("Nouvelle prime : ");
+                    Double newPrime = scanner.nextDouble();
+
+                    System.out.println("Participe t il a un essai clinique ?O/N");
+                    scanner.nextLine();
+                    String yesOrNot = scanner.nextLine();
+
+                    boolean newEssaiClinique = false;
+                    String newDebutEssai = null;
+                    String newFinEssai = null;
+
+                    if(yesOrNot.equals("O")){
+                        newEssaiClinique = true;
+                        if(newEssaiClinique){
+                            System.out.println("Nouvelle date essai clinique :");
+                            newDebutEssai = scanner.nextLine();
+
+                            System.out.println("Nouvelle date fin essai clinique :");
+                            newFinEssai = scanner.nextLine();
+                        }
+                    }else{
+                        newEssaiClinique = false;
+                    }
+
+                    Collaborateur collaborateur = new Medecin(
+                            newName, newSurname, newMail, newPhone, newCodeProjet,
+                            newDate, newVille, newSalaire, newPrime,
+                            newEssaiClinique, newDebutEssai, newFinEssai
+                    );
+                    collaborateur.setNumeroIdentification(nIdentification);
+                    dbConnection.update(collaborateur);
+
+                }else if(choiceUpdate == 2){
+                    System.out.println("Nouveau salaire : ");
+                    Double newSalaire = scanner.nextDouble();
+
+                    System.out.println("Nouvelle prime : ");
+                    Double newPrime = scanner.nextDouble();
+
+                    System.out.println("Le scientifique est il responsable d'une unite ?O/N");
+                    scanner.nextLine();
+                    String yesOrNot = scanner.nextLine();
+
+                    boolean responsable = false;
+
+                    if (yesOrNot.equals("O")){
+                        responsable = true;
+                    }else{
+                        responsable = false;
+                    }
+
+                    Collaborateur collaborateur = new Scientifique(
+                            newName, newSurname, newMail, newPhone,
+                            newCodeProjet, newDate, newVille,
+                            newSalaire, newPrime, responsable
+                    );
+                    collaborateur.setNumeroIdentification(nIdentification);
+                    dbConnection.update(collaborateur);
+
+                }else if(choiceUpdate == 3){
+                    System.out.println("Nouveau salaire : ");
+                    Double newSalaire = scanner.nextDouble();
+
+                    System.out.println("Nouvelle note de frais (0 si le commercial ne participe pas a une soirée) :");
+                    Double newNoteFrais = scanner.nextDouble();
+
+                    boolean remboursement = false;
+
+                    if(!newNoteFrais.equals(0.0)){
+                        System.out.println("Le remboursement a t il déjà ete effectué?O/N");
+                        scanner.nextLine();
+                        String yesOrNot = scanner.nextLine();
+
+                        if(yesOrNot.equals("O")){
+                            remboursement = true;
+                        }else{
+                            remboursement = false;
+                        }
+                    }else{
+                        remboursement = false;
+                    }
+                    Collaborateur collaborateur = new Commercial(
+                            newName, newSurname, newMail, newPhone,
+                            newCodeProjet, newDate, newVille, newSalaire,
+                            newNoteFrais, remboursement
+                    );
+
+                    collaborateur.setNumeroIdentification(nIdentification);
+                    dbConnection.update(collaborateur);
+                }
+
         }
+
     }
 }
