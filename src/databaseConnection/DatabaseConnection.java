@@ -1,5 +1,6 @@
 package databaseConnection;
 
+import com.sun.org.apache.regexp.internal.REUtil;
 import employes.Collaborateur;
 import employes.Commercial;
 import employes.Medecin;
@@ -147,14 +148,14 @@ public class DatabaseConnection {
         }
     }
 
-    public boolean insert(Unite unite, Collaborateur collaborateur){
+    public boolean insert(Unite unite){
         initConnection();
 
         try{
-            String insert = "INSERT INTO unite(nomUnite, numeroRue, nomRue, codePostal, villeUnite, dateResponsabilite, nIdentificationSC)" +
-                    "VALUES(?, ?, ?, ?, ?, ?, ?);";
+            String insert = "INSERT INTO unite(nomUnite, numeroRue, nomRue, codePostal, villeUnite, dateResponsabilite)" +
+                    "VALUES(?, ?, ?, ?, ?, ?);";
 
-            PreparedStatement statement = connection.prepareStatement(insert);
+            PreparedStatement statement = connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
 
             statement.setString(1, unite.getNomUnite());
             statement.setString(2, unite.getNumeroRue());
@@ -162,14 +163,43 @@ public class DatabaseConnection {
             statement.setInt(4, unite.getCodePostal());
             statement.setString(5, unite.getVille());
             statement.setString(6, unite.getDateResponsabilite());
-            statement.setInt(7, collaborateur.getNumeroIdentification());
 
-            return statement.execute();
+            statement.execute();
+
+            ResultSet generatedKeys = statement.getGeneratedKeys();
+            int uniteId;
+            if(generatedKeys.next()){
+                uniteId = generatedKeys.getInt(1);
+                unite.setId(uniteId);
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
         }
+        return true;
+    }
+
+    public boolean insertScUnite(Collaborateur collaborateur, Unite unite){
+        initConnection();
+
+        try {
+
+            String insertScUnite = "INSERT INTO scientifique_unite(idScientifique, idUnite) " +
+                    "VALUES(?, ?);";
+
+            PreparedStatement statement = connection.prepareStatement(insertScUnite);
+
+            statement.setInt(1, collaborateur.getNumeroIdentification());
+            statement.setInt(2, unite.getId());
+
+            return statement.execute();
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+
     }
 
     public boolean insert(Evenement evenement){
