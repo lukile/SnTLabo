@@ -1,8 +1,16 @@
 package employes;
 
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Date;
+import java.util.Locale;
+
 public class Scientifique extends Collaborateur{
 
-	private Double 		salaire;
 	private Double 		prime;
 	private boolean 	responsable;
 	
@@ -14,23 +22,66 @@ public class Scientifique extends Collaborateur{
 			int codeProjet,
 			String dateEmbauche,
 			String ville,
-			Double salaire,
 			Double prime,
 			boolean responsable){
 		
 		super(nom, prenom, email, telephone, codeProjet, dateEmbauche, ville);
 
-		this.salaire = salaire;
 		this.prime = prime;
 		this.responsable = responsable;		
 	}
-	
-	public Double getSalaire() {
-		return salaire;
+
+	public Scientifique(Collaborateur collaborateur,
+			Double prime,
+			boolean responsable){
+
+		this(collaborateur.getNom(), collaborateur.getPrenom(),
+				collaborateur.getEmail(), collaborateur.getTelephone(),
+				collaborateur.getCodeProjet(), collaborateur.getDateEmbauche(),
+				collaborateur.getVille(), prime, responsable);
+
+		this.setNumeroIdentification(collaborateur.getNumeroIdentification());
 	}
 
-	public void setSalaire(Double salaire) {
-		this.salaire = salaire;
+	@Override
+	public Double getComputedSalaire() {
+
+		String dateEmbauche = getDateEmbauche();
+
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+		formatter = formatter.withLocale(Locale.FRANCE);
+		LocalDate dateEmb = LocalDate.parse(dateEmbauche, formatter);
+
+		System.out.println(dateEmb);
+
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+		LocalDateTime now = LocalDateTime.now();
+		String current = dtf.format(now);
+		LocalDate currentDate = LocalDate.parse(current, formatter);
+
+		System.out.println(currentDate);
+
+		LocalDate date1 = dateEmb.plusYears(1);
+		LocalDate date2 = dateEmb.plusYears(2);
+		LocalDate date3 = dateEmb.plusYears(3);
+		LocalDate date4 = dateEmb.plusYears(4);
+		LocalDate date5 = dateEmb.plusYears(5);
+
+		if(date5.compareTo(currentDate) < 0){
+			this.salaire += 5000;
+		}else if(date4.compareTo(currentDate) < 0){
+			this.salaire += 4000;
+		}else if(date3.compareTo(currentDate) < 0){
+			this.salaire += 3000;
+		}else if(date2.compareTo(currentDate) < 0){
+			this.salaire += 2000;
+		}else if(date1.compareTo(currentDate) < 0){
+			this.salaire += 1000;
+		}else if(dateEmb.compareTo(currentDate) > 0){
+			this.salaire = 10000.0;
+		}
+
+		return salaire;
 	}
 
 	public Double getPrime() {
@@ -53,7 +104,7 @@ public class Scientifique extends Collaborateur{
 	public String toString() {
 		return "Scientifique : "
 				+ super.toString()
-				+ ", salaire =" + salaire 
+				+ ", salaire =" + getComputedSalaire()
 				+ ", prime =" + prime 
 				+ ", responsable =" + responsable;
 	}	
