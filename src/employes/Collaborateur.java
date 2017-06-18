@@ -10,9 +10,16 @@ public class Collaborateur {
 	protected int 		codeProjet;
 	protected String 	dateEmbauche;
 	protected String	ville;
+	protected Double 	salaire;
 	
 	
-	public Collaborateur(String nom, String prenom, String email, String telephone, int codeProjet, String dateEmbauche, String ville){
+	public Collaborateur(String nom,
+						 String prenom,
+						 String email,
+						 String telephone,
+						 int codeProjet,
+						 String dateEmbauche,
+						 String ville){
 		this.nom = nom;
 		this.prenom = prenom;
 		this.email = email;
@@ -20,6 +27,10 @@ public class Collaborateur {
 		this.codeProjet = codeProjet;
 		this.dateEmbauche = dateEmbauche;
 		this.ville = ville;
+	}
+
+	public Double getComputedSalaire() {
+		return this.salaire;
 	}
 
 	public int getNumeroIdentification() {
@@ -90,16 +101,25 @@ public class Collaborateur {
 		this.ville = ville;
 	}
 
+	public Double getSalaire() {
+		return salaire;
+	}
+
+	public void setSalaire(Double salaire) {
+		this.salaire = salaire;
+	}
+
 	@Override
 	public String toString() {
-		return "Collaborateur : "
-				+ " numero d'identification = " + numeroIdentification 
-				+ ", nom = " + nom + 
-				", prenom = " + prenom
-				+ ", email = " + email + 
-				", telephone = " + telephone + 
-				", codeProjet = " + codeProjet 
-				+ ", dateEmbauche = " + dateEmbauche 
-				+ ", ville = " + ville.toString();
+		return "Collaborateur{" +
+				"numeroIdentification=" + numeroIdentification +
+				", nom='" + nom + '\'' +
+				", prenom='" + prenom + '\'' +
+				", email='" + email + '\'' +
+				", telephone='" + telephone + '\'' +
+				", codeProjet=" + codeProjet +
+				", dateEmbauche='" + dateEmbauche + '\'' +
+				", ville='" + ville + '\'' +
+				'}';
 	}
 }
