@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Sam 17 Juin 2017 à 21:48
+-- Généré le :  Dim 18 Juin 2017 à 22:59
 -- Version du serveur :  5.7.14
 -- Version de PHP :  5.6.25
 
@@ -42,8 +42,10 @@ CREATE TABLE `collaborateur` (
 --
 
 INSERT INTO `collaborateur` (`numeroIdentification`, `nom`, `prenom`, `email`, `telephone`, `codeProjet`, `dateEmbauche`, `ville`) VALUES
-(95, 'COCO', 'jean charles', 'jc@g.com', '220220', 3, '12/02/2012', 'Pari'),
-(96, 'POUET', 'POUET', 'pouet', '12200202', 3, 'kkeke', 'ekkee');
+(104, 'nouveaunom', 'nouveaunom', 'nouveaunom', 'nouveaunom', 34, 'nouveaunom', 'nouveaunom'),
+(105, 'nom', 'nom', 'nom', 'nom', 12, '03-02-2012', 'nom'),
+(106, 'pouet', 'pouet', 'pouet', 'pouet', 5, '03-04-2013', 'pouet'),
+(107, 'Pouet', 'pouet', 'pouet', 'pouet', 3, '05-05-2015', 'pouet');
 
 -- --------------------------------------------------------
 
@@ -63,8 +65,7 @@ CREATE TABLE `commercial` (
 --
 
 INSERT INTO `commercial` (`nIdentification`, `salaire`, `noteDeFrais`, `remboursement`) VALUES
-(95, 12000, 1493, 1),
-(96, 12, 14, 0);
+(106, 3000, 9, 0);
 
 -- --------------------------------------------------------
 
@@ -82,8 +83,7 @@ CREATE TABLE `commercial_evenement` (
 --
 
 INSERT INTO `commercial_evenement` (`idCommercial`, `idEvenement`) VALUES
-(95, 6),
-(96, 7);
+(106, 10);
 
 -- --------------------------------------------------------
 
@@ -96,6 +96,13 @@ CREATE TABLE `congres` (
   `dateDebutCongres` varchar(255) DEFAULT NULL,
   `dateFinCongres` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `congres`
+--
+
+INSERT INTO `congres` (`idEvenement`, `dateDebutCongres`, `dateFinCongres`) VALUES
+(9, '12/12/1222', '12/12/1223');
 
 -- --------------------------------------------------------
 
@@ -114,8 +121,8 @@ CREATE TABLE `evenement` (
 --
 
 INSERT INTO `evenement` (`id`, `adresse`, `moleculeTestee`) VALUES
-(6, '3 rue de la bigotiere', 'chavroux'),
-(7, 'ZEEEO', 'ekek');
+(9, '7 rue de la picolere', 'ether'),
+(10, '3 rue de la boustifaille', 'polyglycerine');
 
 -- --------------------------------------------------------
 
@@ -132,6 +139,13 @@ CREATE TABLE `medecin` (
   `finEssaiClinique` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Contenu de la table `medecin`
+--
+
+INSERT INTO `medecin` (`nIdentification`, `salaire`, `prime`, `essaiClinique`, `debutEssaiClinique`, `finEssaiClinique`) VALUES
+(104, 12000, 233, 1, 'nouveaunom', 'nouveaunom');
+
 -- --------------------------------------------------------
 
 --
@@ -142,6 +156,13 @@ CREATE TABLE `medecin_evenement` (
   `idMedecin` int(11) NOT NULL,
   `idEvenement` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `medecin_evenement`
+--
+
+INSERT INTO `medecin_evenement` (`idMedecin`, `idEvenement`) VALUES
+(104, 9);
 
 -- --------------------------------------------------------
 
@@ -155,6 +176,32 @@ CREATE TABLE `scientifique` (
   `prime` double DEFAULT NULL,
   `responsable` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `scientifique`
+--
+
+INSERT INTO `scientifique` (`nIdentification`, `salaire`, `prime`, `responsable`) VALUES
+(105, 34444, 2333, 1),
+(107, 4500, 9, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `scientifique_unite`
+--
+
+CREATE TABLE `scientifique_unite` (
+  `idScientifique` int(11) NOT NULL,
+  `idUnite` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Contenu de la table `scientifique_unite`
+--
+
+INSERT INTO `scientifique_unite` (`idScientifique`, `idUnite`) VALUES
+(105, 10);
 
 -- --------------------------------------------------------
 
@@ -174,7 +221,7 @@ CREATE TABLE `soiree` (
 --
 
 INSERT INTO `soiree` (`idEvenement`, `dateSoiree`, `heureDebutSoiree`, `heureFinSoiree`) VALUES
-(7, '12/02/2122', '12:00:00', '23:00:00');
+(10, '12/12/3000', '12:00:00', '15:00:00');
 
 -- --------------------------------------------------------
 
@@ -189,9 +236,15 @@ CREATE TABLE `unite` (
   `nomRue` varchar(255) DEFAULT NULL,
   `codePostal` int(11) DEFAULT NULL,
   `villeUnite` varchar(255) DEFAULT NULL,
-  `dateResponsabilite` varchar(255) NOT NULL,
-  `nIdentificationSC` int(11) DEFAULT NULL
+  `dateResponsabilite` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `unite`
+--
+
+INSERT INTO `unite` (`id`, `nomUnite`, `numeroRue`, `nomRue`, `codePostal`, `villeUnite`, `dateResponsabilite`) VALUES
+(10, 'Unity', '3', 'Pouettou', 22122, 'POUETTOU', '12/12/1221');
 
 --
 -- Index pour les tables exportées
@@ -253,6 +306,13 @@ ALTER TABLE `scientifique`
   ADD KEY `nIdentification` (`nIdentification`);
 
 --
+-- Index pour la table `scientifique_unite`
+--
+ALTER TABLE `scientifique_unite`
+  ADD PRIMARY KEY (`idScientifique`,`idUnite`),
+  ADD KEY `idUnite` (`idUnite`);
+
+--
 -- Index pour la table `soiree`
 --
 ALTER TABLE `soiree`
@@ -273,17 +333,17 @@ ALTER TABLE `unite`
 -- AUTO_INCREMENT pour la table `collaborateur`
 --
 ALTER TABLE `collaborateur`
-  MODIFY `numeroIdentification` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
+  MODIFY `numeroIdentification` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
 --
 -- AUTO_INCREMENT pour la table `evenement`
 --
 ALTER TABLE `evenement`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT pour la table `unite`
 --
 ALTER TABLE `unite`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- Contraintes pour les tables exportées
 --
@@ -326,6 +386,13 @@ ALTER TABLE `medecin_evenement`
 --
 ALTER TABLE `scientifique`
   ADD CONSTRAINT `scientifique_ibfk_1` FOREIGN KEY (`nIdentification`) REFERENCES `collaborateur` (`numeroIdentification`);
+
+--
+-- Contraintes pour la table `scientifique_unite`
+--
+ALTER TABLE `scientifique_unite`
+  ADD CONSTRAINT `scientifique_unite_ibfk_1` FOREIGN KEY (`idUnite`) REFERENCES `unite` (`id`),
+  ADD CONSTRAINT `scientifique_unite_ibfk_2` FOREIGN KEY (`idScientifique`) REFERENCES `scientifique` (`nIdentification`);
 
 --
 -- Contraintes pour la table `soiree`
