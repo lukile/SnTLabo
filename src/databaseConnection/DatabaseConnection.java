@@ -426,5 +426,145 @@ public class DatabaseConnection {
         }
     }
 
+    public boolean deleteMedecinEvenement(int numeroIdentification) {
+        initConnection();
+
+        try {
+            String delete = "DELETE FROM medecin_evenement " +
+                    "WHERE idMedecin = ?;";
+
+            PreparedStatement statement = connection.prepareStatement(delete);
+
+            statement.setInt(1, numeroIdentification);
+
+            return statement.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean deleteMedecin(int numeroIdentification) {
+        initConnection();
+
+        try {
+            String delete = "DELETE FROM medecin " +
+                    "WHERE nIdentification = ?;";
+
+            PreparedStatement statement = connection.prepareStatement(delete);
+
+            statement.setInt(1, numeroIdentification);
+
+            return statement.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean deleteCollaborateur(int numeroIdentification){
+        initConnection();
+
+        try{
+            String delete = "DELETE FROM collaborateur " +
+                    "WHERE numeroIdentification = ?";
+
+            PreparedStatement statement = connection.prepareStatement(delete);
+
+            statement.setInt(1, numeroIdentification);
+
+            return  statement.execute();
+
+        } catch (SQLException e) {
+            unchecked(() -> connection.rollback());
+
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean deleteScUnite(int numeroIdentification) {
+        initConnection();
+
+        try {
+            String delete = "DELETE FROM scientifique_unite " +
+                    "WHERE idScientifique = ?;";
+
+            PreparedStatement statement = connection.prepareStatement(delete);
+
+            statement.setInt(1, numeroIdentification);
+
+            return statement.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean deleteScientifique(int numeroIdentification){
+        initConnection();
+
+        try{
+            String delete = "DELETE FROM scientifique " +
+                    "WHERE nIdentification = ?;";
+
+            PreparedStatement statement = connection.prepareStatement(delete);
+
+            statement.setInt(1, numeroIdentification);
+
+            return statement.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean deleteComEvenement(int numeroIdentification){
+        initConnection();
+
+        try{
+            String delete = "DELETE FROM commercial_evenement " +
+                    "WHERE idCommercial = ?;";
+
+            PreparedStatement statement = connection.prepareStatement(delete);
+
+            statement.setInt(1, numeroIdentification);
+
+            return statement.execute();
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean deleteCommercial(int numeroIdentification){
+        initConnection();
+
+        try{
+            String delete = "DELETE FROM commercial " +
+                    "WHERE nIdentification = ?;";
+
+            PreparedStatement statement = connection.prepareStatement(delete);
+
+            statement.setInt(1, numeroIdentification);
+
+            return statement.execute();
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+//    public boolean displayMedecin(){
+//        initConnection();
+//
+//        String display = "SELECT * FROM "
+//    }
 
 }
