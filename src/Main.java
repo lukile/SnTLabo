@@ -178,7 +178,8 @@ public class Main {
                                 nomUnite, numRue, nomRue, cp,
                                 villeU, dateResponsabiliteSC
                         );
-                        dbConnection.insert(unite, collaborateur);
+                        dbConnection.insert(unite);
+                        dbConnection.insertScUnite(collaborateur, unite);
                     }
 
                 }else if(choice == 3){
