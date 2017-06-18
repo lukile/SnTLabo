@@ -2,35 +2,41 @@ package employes;
 
 public class Commercial extends Collaborateur{
 
-	private Double 		salaire;
 	private Double 		noteDeFrais;
 	private boolean 	remboursement;
-		
+
 	public Commercial(
 			String nom,
-			String prenom, 
+			String prenom,
 			String email,
 			String telephone,
 			int codeProjet,
 			String dateEmbauche,
-			String ville, 
-			Double salaire, 
-			Double noteDeFrais, 
+			String ville,
+			Double noteDeFrais,
 			boolean remboursement){
-		
+
 		super(nom, prenom, email, telephone, codeProjet, dateEmbauche, ville);
-		
-		this.salaire = salaire;
+
 		this.noteDeFrais = noteDeFrais;
 		this.remboursement = remboursement;
 	}
-	
-	public Double getSalaire() {
-		return salaire;
+		
+	public Commercial(Collaborateur collaborateur,
+			Double noteDeFrais,
+			boolean remboursement){
+		
+		this(collaborateur.getNom(), collaborateur.getPrenom(),
+				collaborateur.getEmail(), collaborateur.getTelephone(),
+				collaborateur.getCodeProjet(), collaborateur.getDateEmbauche(),
+				collaborateur.getVille(), noteDeFrais, remboursement);
+
+		this.setNumeroIdentification(collaborateur.getNumeroIdentification());
 	}
 
-	public void setSalaire(Double salaire) {
-		this.salaire = salaire;
+	@Override
+	public Double getComputedSalaire() {
+		return this.salaire + 1000;
 	}
 
 	public Double getNoteDeFrais() {
@@ -53,7 +59,7 @@ public class Commercial extends Collaborateur{
 	public String toString() {
 		return "Commercial : "
 				+ super.toString()
-				+ ", salaire = " + salaire 
+				+ ", salaire = " + getComputedSalaire()
 				+ ", note de frais=" + noteDeFrais 
 				+ ", remboursement=" + remboursement;
 	}
