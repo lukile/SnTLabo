@@ -448,7 +448,13 @@ public class Main {
                         System.out.println(collaborateur.getComputedSalaire());
                     }
 
+                    System.out.println("Souhaitez vous enregistrer le nouveau salaire calculé pour ce collaborateur?O/N");
+                    scanner.nextLine();
+                    String register = scanner.nextLine();
 
+                    if(register.equals("O")){
+                        dbConnection.update(collab.get(0));
+                    }
         }
 
     }
