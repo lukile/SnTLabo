@@ -52,14 +52,10 @@ public class Scientifique extends Collaborateur{
 		formatter = formatter.withLocale(Locale.FRANCE);
 		LocalDate dateEmb = LocalDate.parse(dateEmbauche, formatter);
 
-		System.out.println(dateEmb);
-
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 		LocalDateTime now = LocalDateTime.now();
 		String current = dtf.format(now);
 		LocalDate currentDate = LocalDate.parse(current, formatter);
-
-		System.out.println(currentDate);
 
 		LocalDate date1 = dateEmb.plusYears(1);
 		LocalDate date2 = dateEmb.plusYears(2);
@@ -68,8 +64,8 @@ public class Scientifique extends Collaborateur{
 		LocalDate date5 = dateEmb.plusYears(5);
 		LocalDate date6 = dateEmb.plusYears(6);
 
-		if(date5.compareTo(currentDate) < 0){
-			this.salaire += 5000;
+		if(date6.compareTo(currentDate) <= 0){
+			this.salaire = 10000.0;
 		}else if(date4.compareTo(currentDate) < 0){
 			this.salaire += 4000;
 		}else if(date3.compareTo(currentDate) < 0){
@@ -78,8 +74,8 @@ public class Scientifique extends Collaborateur{
 			this.salaire += 2000;
 		}else if(date1.compareTo(currentDate) < 0){
 			this.salaire += 1000;
-		}else if(date6.compareTo(currentDate) < 0){
-			this.salaire = 10000.0;
+		}else if(date5.compareTo(currentDate) < 0){
+			this.salaire += 5000;
 		}
 
 		return salaire;
