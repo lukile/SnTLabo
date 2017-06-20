@@ -194,8 +194,12 @@ public class DatabaseConnection {
             return statement.execute();
 
         }catch (SQLException e) {
+            unchecked(() -> connection.rollback());
+
             e.printStackTrace();
             return false;
+        } finally {
+            unchecked(() -> connection.close());
         }
 
     }
@@ -253,6 +257,8 @@ public class DatabaseConnection {
 
             e.printStackTrace();
             return false;
+        } finally {
+            unchecked(() -> connection.close());
         }
     }
 
@@ -314,6 +320,8 @@ public class DatabaseConnection {
 
             e.printStackTrace();
             return false;
+        } finally {
+            unchecked(() -> connection.close());
         }
     }
 
@@ -480,6 +488,8 @@ public class DatabaseConnection {
 
             e.printStackTrace();
             return false;
+        } finally {
+            unchecked(() -> connection.close());
         }
     }
 
@@ -597,9 +607,13 @@ public class DatabaseConnection {
 
             return results;
 
-        } catch (SQLException e) {
+        }catch (SQLException e) {
+            unchecked(() -> connection.rollback());
+
             e.printStackTrace();
             return new ArrayList<>();
+        } finally {
+            unchecked(() -> connection.close());
         }
     }
 
@@ -769,22 +783,12 @@ public class DatabaseConnection {
                 results.add(collaborateur);
             }
 
-
-//            ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
-//
-//            for (int i = 1; i <= resultSetMetaData.getColumnCount(); i++) {
-//                System.out.println("\t" + resultSetMetaData.getColumnName(i).toUpperCase() + "\t *");
-//            }
-//
-//            while (resultSet.next()) {
-//                for (int i = 1; i <= resultSetMetaData.getColumnCount(); i++) {
-//                    System.out.println("\t" + resultSet.getObject(i).toString() + "\t |");
-//                }
-//
-//            }
-
         } catch (SQLException e) {
+            unchecked(() -> connection.rollback());
+
             e.printStackTrace();
+        } finally {
+            unchecked(() -> connection.close());
         }
 
         return results;
