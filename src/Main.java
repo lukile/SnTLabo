@@ -1,8 +1,5 @@
 import databaseConnection.DatabaseConnection;
-import employes.Collaborateur;
-import employes.Commercial;
-import employes.Medecin;
-import employes.Scientifique;
+import employes.*;
 import evenements.Congres;
 import evenements.Evenement;
 import evenements.Soiree;
@@ -438,24 +435,45 @@ public class Main {
                 break;
 
             case 5:
-                    System.out.println("Saisissez le numero d'identification du collaborateur :");
+                System.out.println("Saisissez le numero d'identification du collaborateur :");
 
-                    int numeroId = scanner.nextInt();
+                int numeroId = scanner.nextInt();
 
-                    List<Collaborateur> collab = dbConnection.findCollaborateur(numeroId);
+                List<Collaborateur> collab = dbConnection.findCollaborateur(numeroId);
 
-                    for(Collaborateur collaborateur : collab){
-                        System.out.println(collaborateur.getComputedSalaire());
-                    }
+                for(Collaborateur collaborateur : collab){
+                    System.out.println(collaborateur.getComputedSalaire());
+                }
 
-                    System.out.println("Souhaitez vous enregistrer le nouveau salaire calculé pour ce collaborateur?O/N");
-                    scanner.nextLine();
-                    String register = scanner.nextLine();
+                System.out.println("Souhaitez vous enregistrer le nouveau salaire calculé pour ce collaborateur?O/N");
+                scanner.nextLine();
+                String register = scanner.nextLine();
 
-                    if(register.equals("O")){
-                        dbConnection.update(collab.get(0));
-                    }
+                if(register.equals("O")){
+                    dbConnection.update(collab.get(0));
+                }
+                break;
+
+            case 6:
+                //Lister collaborateur par catégorie et par région
+                System.out.println("Quel type de collaborateur voulez vous lister? \n" +
+                        "1 - Les médecins\n" +
+                        "2 - Les scientifiques\n" +
+                        "3 - Les commerciaux");
+
+                int listChoice = scanner.nextInt();
+                TypeCollaborateur typeCollaborateur = TypeCollaborateur.valueOf(listChoice);
+                List<Collaborateur> list = dbConnection.list(typeCollaborateur);
+
+                for (Collaborateur collaborateur : list) {
+                    System.out.println(collaborateur);
+                }
+
+                break;
+            case 7 :
+                System.out.println("Merci au revoir !");
+                break;
         }
-
     }
 }
+
