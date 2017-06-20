@@ -94,13 +94,7 @@ public class Commercial extends Collaborateur{
 			this.salaire += (budget * 1) / 100;
 		}else if(date1.compareTo(currentDate) < 0){
 			this.salaire += (budget * 0.5) / 100;
-
-
 		}
-
-
-
-
 		return salaire;
 	}
 
