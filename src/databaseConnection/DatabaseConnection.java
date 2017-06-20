@@ -1,9 +1,6 @@
 package databaseConnection;
 
-import employes.Collaborateur;
-import employes.Commercial;
-import employes.Medecin;
-import employes.Scientifique;
+import employes.*;
 import evenements.Congres;
 import evenements.Evenement;
 import evenements.Soiree;
@@ -724,7 +721,72 @@ public class DatabaseConnection {
         }
     }
 
+    public List<Collaborateur> list(TypeCollaborateur type) {
+        initConnection();
+        List<Collaborateur> results = new ArrayList<>();
+        try {
+            String request = "SELECT * FROM collaborateur c " +
+                    "INNER JOIN " + type.getTableName() + " m on c.numeroIdentification = m.nIdentification " +
+                    "ORDER BY ville";
+
+            PreparedStatement statement = connection.prepareStatement(request);
+
+            ResultSet result = statement.executeQuery();
+
+            while(result.next()) {
+                int numeroIdentification = result.getInt("c.numeroIdentification");
+                String nom = result.getString(2);
+                String prenom = result.getString(3);
+                String email = result.getString(4);
+                String telephone = result.getString(5);
+                int codeProjet = result.getInt(6);
+                String dateEmbauche = result.getString(7);
+                String ville = result.getString(8);
+
+                Collaborateur collaborateur = new Collaborateur(nom, prenom, email,
+                        telephone, codeProjet, dateEmbauche, ville);
+
+                collaborateur.setNumeroIdentification(numeroIdentification);
+
+                if (type == TypeCollaborateur.MEDECIN) {
+                    Double prime = result.getDouble("prime");
+                    boolean essaiClinique = result.getBoolean("essaiClinique");
+                    String debutEssaiClinique = result.getString("debutEssaiClinique");
+                    String finEssaiClinique = result.getString("finEssaiClinique");
+                    new Medecin(collaborateur, prime, essaiClinique, debutEssaiClinique, finEssaiClinique);
+
+                } else if (type == TypeCollaborateur.COMMERCIAUX) {
+                    Double noteDeFrais = result.getDouble("noteDeFrais");
+                    boolean remboursement = result.getBoolean("remboursement");
+                    new Commercial(collaborateur, noteDeFrais, remboursement);
+
+                } else if (type == TypeCollaborateur.SCIENTIFIQUE) {
+                    Double prime = result.getDouble("prime");
+                    boolean responsable = result.getBoolean("responsable");
+                    new Scientifique(collaborateur, prime, responsable);
+                }
+
+                results.add(collaborateur);
+            }
 
 
+//            ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
+//
+//            for (int i = 1; i <= resultSetMetaData.getColumnCount(); i++) {
+//                System.out.println("\t" + resultSetMetaData.getColumnName(i).toUpperCase() + "\t *");
+//            }
+//
+//            while (resultSet.next()) {
+//                for (int i = 1; i <= resultSetMetaData.getColumnCount(); i++) {
+//                    System.out.println("\t" + resultSet.getObject(i).toString() + "\t |");
+//                }
+//
+//            }
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return results;
+    }
 }
