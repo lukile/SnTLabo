@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Dim 18 Juin 2017 à 22:59
+-- Généré le :  Mar 20 Juin 2017 à 22:11
 -- Version du serveur :  5.7.14
 -- Version de PHP :  5.6.25
 
@@ -42,10 +42,14 @@ CREATE TABLE `collaborateur` (
 --
 
 INSERT INTO `collaborateur` (`numeroIdentification`, `nom`, `prenom`, `email`, `telephone`, `codeProjet`, `dateEmbauche`, `ville`) VALUES
-(104, 'nouveaunom', 'nouveaunom', 'nouveaunom', 'nouveaunom', 34, 'nouveaunom', 'nouveaunom'),
-(105, 'nom', 'nom', 'nom', 'nom', 12, '03-02-2012', 'nom'),
-(106, 'pouet', 'pouet', 'pouet', 'pouet', 5, '03-04-2013', 'pouet'),
-(107, 'Pouet', 'pouet', 'pouet', 'pouet', 3, '05-05-2015', 'pouet');
+(104, 'nouveaunom', 'nouveaunom', 'nouveaunom', 'nouveaunom', 34, 'nouveaunom', 'Strasbourg'),
+(105, 'nom', 'nom', 'nom', 'nom', 12, '03-02-2009', 'Grenoble'),
+(106, 'pouet', 'pouet', 'pouet', 'pouet', 5, '03-04-2013', 'Marseille'),
+(107, 'Pouet', 'pouet', 'pouet', 'pouet', 3, '05-05-2015', 'Bordeaux'),
+(108, 'Jean Louis', 'Jean charles', 'jc@g.com', '200202020', 12, '12-02-2012', 'Strasbourg'),
+(109, 'Luc', 'Jean', 'jl@g.com', '0202020202', 4, '30-06-2012', 'Rennes'),
+(110, 'Jean Louis', 'Jean charles', 'jc@g.com', '200202020', 12, '12-02-2012', 'Strasbourg'),
+(111, 'Luc', 'Jean', 'jl@g.com', '0202020202', 4, '30-06-2012', 'Rennes');
 
 -- --------------------------------------------------------
 
@@ -65,7 +69,7 @@ CREATE TABLE `commercial` (
 --
 
 INSERT INTO `commercial` (`nIdentification`, `salaire`, `noteDeFrais`, `remboursement`) VALUES
-(106, 3000, 9, 0);
+(106, 3150, 9, 0);
 
 -- --------------------------------------------------------
 
@@ -144,7 +148,9 @@ CREATE TABLE `medecin` (
 --
 
 INSERT INTO `medecin` (`nIdentification`, `salaire`, `prime`, `essaiClinique`, `debutEssaiClinique`, `finEssaiClinique`) VALUES
-(104, 12000, 233, 1, 'nouveaunom', 'nouveaunom');
+(104, 12000, 233, 1, 'nouveaunom', 'nouveaunom'),
+(110, 4600, 543, 0, '0', '0'),
+(111, 45000, 60, 1, '23-06-2012', '23-07-2034');
 
 -- --------------------------------------------------------
 
@@ -182,7 +188,7 @@ CREATE TABLE `scientifique` (
 --
 
 INSERT INTO `scientifique` (`nIdentification`, `salaire`, `prime`, `responsable`) VALUES
-(105, 34444, 2333, 1),
+(105, 10000, 2333, 1),
 (107, 4500, 9, 0);
 
 -- --------------------------------------------------------
@@ -333,7 +339,7 @@ ALTER TABLE `unite`
 -- AUTO_INCREMENT pour la table `collaborateur`
 --
 ALTER TABLE `collaborateur`
-  MODIFY `numeroIdentification` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
+  MODIFY `numeroIdentification` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
 --
 -- AUTO_INCREMENT pour la table `evenement`
 --
